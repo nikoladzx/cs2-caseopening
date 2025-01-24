@@ -2,6 +2,7 @@ package com.blabla.projekat.services.cases;
 
 import com.blabla.projekat.dto.CaseDTO;
 import com.blabla.projekat.dto.ItemDTO;
+import com.blabla.projekat.dto.SkinDTO;
 import com.blabla.projekat.entities.Case;
 import com.blabla.projekat.entities.Item;
 import com.blabla.projekat.entities.Skin;
@@ -50,7 +51,7 @@ public class CaseServiceImpl implements CaseService{
     }
 
     @Override
-    public Skin unbox(Long caseId, Long userId) {
+    public SkinDTO unbox(Long caseId, Long userId) {
         Optional<Case> crate = caseRepository.findById(caseId);
         Optional<User> user = userRepository.findById(userId);
         if (crate.isPresent() && user.isPresent())
@@ -93,7 +94,15 @@ public class CaseServiceImpl implements CaseService{
                 multiplier = 0.75;
             skin.setPrice(item.getPrice() * (rollStattrak < 0.1 ? 2 : 1) * multiplier);
             skinRepository.save(skin);
-            return skin;
+            SkinDTO skinDTO = new SkinDTO();
+            skinDTO.setCondition(skin.getCondition());
+            skinDTO.setType(skin.getItem().getType());
+            skinDTO.setName(skin.getItem().getName());
+            skinDTO.setPrice(skin.getPrice());
+            skinDTO.setStattrak(skin.getStattrak());
+            skinDTO.setImg(skin.getItem().getImg());
+
+            return skinDTO;
         }
         return null;
     }

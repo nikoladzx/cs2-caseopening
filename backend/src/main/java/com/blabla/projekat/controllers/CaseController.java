@@ -3,6 +3,7 @@ package com.blabla.projekat.controllers;
 
 import com.blabla.projekat.dto.CaseDTO;
 import com.blabla.projekat.dto.ItemDTO;
+import com.blabla.projekat.dto.SkinDTO;
 import com.blabla.projekat.entities.Skin;
 import com.blabla.projekat.repositories.CaseRepository;
 import com.blabla.projekat.repositories.UserRepository;
@@ -56,9 +57,9 @@ public class CaseController {
     }
 
     @GetMapping("/unbox/{userId}/{caseId}")
-    public ResponseEntity<Skin> unbox(@RequestParam Long caseId, @RequestParam Long userId)
+    public ResponseEntity<SkinDTO> unbox(@PathVariable Long userId, @PathVariable Long caseId)
     {
-        Skin skin = caseService.unbox(caseId, userId);
+        SkinDTO skin = caseService.unbox(caseId, userId);
         if (skin!=null)
             return ResponseEntity.ok(skin);
         return ResponseEntity.badRequest().build();
