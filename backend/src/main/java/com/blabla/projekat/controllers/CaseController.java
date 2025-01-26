@@ -4,6 +4,7 @@ package com.blabla.projekat.controllers;
 import com.blabla.projekat.dto.CaseDTO;
 import com.blabla.projekat.dto.ItemDTO;
 import com.blabla.projekat.dto.SkinDTO;
+import com.blabla.projekat.entities.Case;
 import com.blabla.projekat.entities.Skin;
 import com.blabla.projekat.repositories.CaseRepository;
 import com.blabla.projekat.repositories.UserRepository;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 
@@ -62,6 +64,26 @@ public class CaseController {
         SkinDTO skin = caseService.unbox(caseId, userId);
         if (skin!=null)
             return ResponseEntity.ok(skin);
+        return ResponseEntity.badRequest().build();
+
+    }
+
+    @GetMapping("/getCase/{caseId}")
+    public ResponseEntity<CaseDTO> unbox(@PathVariable Long caseId)
+    {
+        CaseDTO caseDTO = caseService.getCaseById(caseId);
+        if (caseDTO!=null)
+            return ResponseEntity.ok(caseDTO);
+        return ResponseEntity.badRequest().build();
+
+    }
+
+    @GetMapping("/getCases")
+    public ResponseEntity<List<CaseDTO>> unbox()
+    {
+        List<CaseDTO> caseList = caseService.getCases();
+        if (caseList!=null)
+            return ResponseEntity.ok(caseList);
         return ResponseEntity.badRequest().build();
 
     }

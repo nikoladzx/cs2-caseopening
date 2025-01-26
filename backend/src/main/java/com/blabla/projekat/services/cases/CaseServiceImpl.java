@@ -108,6 +108,28 @@ public class CaseServiceImpl implements CaseService{
     }
 
     @Override
+    public List<CaseDTO> getCases() {
+        List<Case> caseList = caseRepository.findAll();
+        return caseList.stream().map(Case::caseDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public CaseDTO getCaseById(Long caseId) {
+        Optional<Case> crate = caseRepository.findById(caseId);
+        if (crate.isPresent())
+        {
+            CaseDTO newCase = new CaseDTO();
+            newCase.setName(crate.get().getName());
+            newCase.setPrice(crate.get().getPrice());
+            newCase.setReturnedImg(crate.get().getImg());
+
+            newCase.setItems(crate.get().getItems().stream().map(Item::itemDTO).collect(Collectors.toList()));
+            return newCase;
+        }
+        return null;
+    }
+
+    @Override
     public Boolean addCase(CaseDTO caseDTO) throws IOException {
         System.out.println("kvazaraza");
         if (caseDTO != null) {

@@ -1,8 +1,10 @@
 package com.blabla.projekat.entities;
 
+import com.blabla.projekat.dto.CaseDTO;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Entity
@@ -57,4 +59,16 @@ public class Case {
     public void setName(String name) {
         this.name = name;
     }
+
+    public CaseDTO caseDTO() {
+        CaseDTO caseDTO = new CaseDTO();
+        caseDTO.setName(name);
+        caseDTO.setReturnedImg(getImg());
+        caseDTO.setPrice(getPrice());
+        caseDTO.setItems(getItems().stream()
+                .map(Item::itemDTO)
+                .collect(Collectors.toList()));
+        return caseDTO;
+    }
+
 }

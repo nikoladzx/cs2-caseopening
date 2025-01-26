@@ -44,4 +44,8 @@ export class AuthService {
     this.user.next(null);
 
   }
+
+  setCurrentUser(user: UserBasic){
+    this.user.next(user);
+  }
 }

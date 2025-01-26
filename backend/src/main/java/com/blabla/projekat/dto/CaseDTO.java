@@ -2,10 +2,14 @@ package com.blabla.projekat.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public class CaseDTO {
     private String name;
     private MultipartFile img;
+    private byte[] returnedImg;
     private Double price;
+    private List<ItemDTO> items;
 
     public String getName() {
         return name;
@@ -29,5 +33,21 @@ public class CaseDTO {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public byte[] getReturnedImg() {
+        return returnedImg;
+    }
+
+    public void setReturnedImg(byte[] returnedImg) {
+        this.returnedImg = returnedImg;
+    }
+
+    public List<ItemDTO> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemDTO> items) {
+        this.items = items;
     }
 }

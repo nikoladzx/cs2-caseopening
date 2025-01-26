@@ -1,5 +1,6 @@
 package com.blabla.projekat.entities;
 
+import com.blabla.projekat.dto.ItemDTO;
 import com.blabla.projekat.enums.Type;
 import jakarta.persistence.*;
 
@@ -63,5 +64,16 @@ public class Item {
 
     public void setCrate(Case crate) {
         this.crate = crate;
+    }
+
+    public ItemDTO itemDTO()
+    {
+        ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setCaseId(getCrate().getId());
+        itemDTO.setReturnedImg(getImg());
+        itemDTO.setType(getType());
+        itemDTO.setPrice(getPrice());
+        itemDTO.setName(getName());
+        return itemDTO;
     }
 }
