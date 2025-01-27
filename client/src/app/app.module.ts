@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './nav/navbar/navbar.component';
 import { HomeComponent } from './home/home/home.component';
+import { CaseComponent } from './case/components/case/case.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,14 @@ import { HomeComponent } from './home/home/home.component';
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    CaseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

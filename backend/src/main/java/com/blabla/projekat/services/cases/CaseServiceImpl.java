@@ -119,6 +119,7 @@ public class CaseServiceImpl implements CaseService{
         if (crate.isPresent())
         {
             CaseDTO newCase = new CaseDTO();
+            newCase.setId(crate.get().getId());
             newCase.setName(crate.get().getName());
             newCase.setPrice(crate.get().getPrice());
             newCase.setReturnedImg(crate.get().getImg());
@@ -134,6 +135,7 @@ public class CaseServiceImpl implements CaseService{
         System.out.println("kvazaraza");
         if (caseDTO != null) {
             Case newCase = new Case();
+
             newCase.setPrice(caseDTO.getPrice());
             newCase.setName(caseDTO.getName());
             newCase.setImg(caseDTO.getImg().getBytes());

@@ -69,6 +69,7 @@ public class Item {
     public ItemDTO itemDTO()
     {
         ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setId(id);
         itemDTO.setCaseId(getCrate().getId());
         itemDTO.setReturnedImg(getImg());
         itemDTO.setType(getType());

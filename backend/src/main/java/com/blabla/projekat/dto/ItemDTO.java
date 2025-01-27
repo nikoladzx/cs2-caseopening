@@ -4,12 +4,21 @@ import com.blabla.projekat.enums.Type;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ItemDTO {
+    private Long id;
     private MultipartFile img;
     private byte[] returnedImg;
     private String name;
     private Double price;
     private Type type;
     private Long caseId;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public MultipartFile getImg() {
         return img;

@@ -62,6 +62,7 @@ public class Case {
 
     public CaseDTO caseDTO() {
         CaseDTO caseDTO = new CaseDTO();
+        caseDTO.setId(id);
         caseDTO.setName(name);
         caseDTO.setReturnedImg(getImg());
         caseDTO.setPrice(getPrice());

@@ -5,11 +5,20 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public class CaseDTO {
+    private Long id;
     private String name;
     private MultipartFile img;
     private byte[] returnedImg;
     private Double price;
     private List<ItemDTO> items;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
