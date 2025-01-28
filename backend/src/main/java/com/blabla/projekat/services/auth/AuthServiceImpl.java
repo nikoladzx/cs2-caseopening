@@ -48,6 +48,7 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         user.setEmail(signUpRequest.getEmail());
         user.setName(signUpRequest.getName());
+        user.setBalance(0.0);
         String rawPassword = signUpRequest.getPassword();
         String encodedPassword = passwordEncoder.encode(rawPassword);
         System.out.println("Raw password: " + rawPassword);

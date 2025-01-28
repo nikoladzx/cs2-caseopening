@@ -25,7 +25,7 @@ public class User implements UserDetails {
     @Column(length = 150)
     private String password;
     private UserRole userRole;
-    private Double balance;
+    private Double balance =0.0;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Skin> skins;
 

@@ -1,8 +1,7 @@
 package com.blabla.projekat.configurations;
 
 
-import com.blabla.projekat.enums.UserRole;
-import com.blabla.projekat.services.jwt.UserService;
+import com.blabla.projekat.services.user.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -63,7 +62,8 @@ public class WebSecurityConfiguration {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/case/**").permitAll()
-                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")  // Changed this line
+                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/api/user/**").hasAuthority("USER")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(manager ->

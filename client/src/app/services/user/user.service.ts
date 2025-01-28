@@ -1,0 +1,48 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth-service/auth.service';
+
+const BASE_URL = "http://localhost:8080/api/user/";
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+
+constructor(private http: HttpClient, private authService : AuthService) {
+    
+   }
+
+   unbox(caseId:number, userId: number) : Observable<any>
+   {
+    const token = this.authService.getUserToken();
+    const headers = new HttpHeaders({ 'Authorization' : `Bearer ${token}`});
+    return this.http.get(BASE_URL + `unbox/${userId}/${caseId}`, {headers});
+   } 
+
+   getSkins(userId:number) : Observable<any>
+   {
+    const token = this.authService.getUserToken();
+    const headers = new HttpHeaders({ 'Authorization' : `Bearer ${token}`});
+    return this.http.get(BASE_URL+`getSkins/${userId}`, {headers});
+   }
+
+   sellSkin(userId:number, skinId:number) : Observable<any>
+   {
+    const token = this.authService.getUserToken();
+    const headers = new HttpHeaders({ 'Authorization' : `Bearer ${token}`});
+    return this.http.delete(BASE_URL+`sellSkin/${userId}/${skinId}`, {headers});
+   }
+
+   addBalance(userId:number, balance:number) : Observable<any>
+   {
+    const token = this.authService.getUserToken();
+    const headers = new HttpHeaders({ 'Authorization' : `Bearer ${token}`});
+    return this.http.post(BASE_URL+`addBalance/${userId}/${balance}`, {}, {headers});
+   }
+  
+  
+  
+}

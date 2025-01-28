@@ -2,7 +2,6 @@
     <div class="row">
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let case of caseList">
         <div class="card h-100 shadow-sm">
-          <!-- Bind the src attribute to case.returnedImg -->
           <img class="card-img-top" src="data:image/jpeg;base64,{{case.returnedImg}}" alt="Card image cap" style="width: 250; height: 350px;">
           <div class="card-body">
             <h5 class="card-title">{{ case.name }}</h5>

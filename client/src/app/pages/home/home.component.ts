@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { timeout } from 'rxjs';
-import { CaseserviceService } from 'src/app/case/caseservice.service';
+import { CaseserviceService } from 'src/app/services/case/caseservice.service';
 import { Case } from 'src/app/models/Case';
 
 @Component({

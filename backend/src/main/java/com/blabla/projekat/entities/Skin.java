@@ -1,5 +1,6 @@
 package com.blabla.projekat.entities;
 
+import com.blabla.projekat.dto.SkinDTO;
 import com.blabla.projekat.enums.Type;
 import jakarta.persistence.*;
 
@@ -64,6 +65,18 @@ public class Skin {
 
     public void setStattrak(Boolean stattrak) {
         this.stattrak = stattrak;
+    }
+
+    public SkinDTO skinDTO()
+    {
+        SkinDTO skinDTO = new SkinDTO();
+        skinDTO.setName(item.getName());
+        skinDTO.setType(item.getType());
+        skinDTO.setImg(item.getImg());
+        skinDTO.setCondition(condition);
+        skinDTO.setStattrak(stattrak);
+        skinDTO.setPrice(price);
+        return skinDTO;
     }
 
 }

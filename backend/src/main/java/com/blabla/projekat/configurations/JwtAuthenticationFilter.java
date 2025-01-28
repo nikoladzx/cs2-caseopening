@@ -1,7 +1,7 @@
 package com.blabla.projekat.configurations;
 
 
-import com.blabla.projekat.services.jwt.UserService;
+import com.blabla.projekat.services.user.UserService;
 import com.blabla.projekat.utils.JWTUtil;
 
 import io.micrometer.common.util.StringUtils;

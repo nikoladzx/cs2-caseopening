@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Case } from 'src/app/models/Case';
-import { CaseserviceService } from '../../caseservice.service';
+import { CaseserviceService } from '../../services/case/caseservice.service';
 import { UserBasic } from 'src/app/models/UserBasic';
 import { Item } from 'src/app/models/Item';
 import { Skin } from 'src/app/models/Skin';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-case',
@@ -17,7 +18,7 @@ export class CaseComponent implements OnInit {
   caseId: string | null = null;
   case: Case | null = null;
   skin: Skin | null = null;
-  constructor(private route: ActivatedRoute, private caseService: CaseserviceService ) { }
+  constructor(private route: ActivatedRoute, private caseService: CaseserviceService, private userService: UserService ) { }
 
   ngOnInit(): void {
     this.caseId= this.route.snapshot.paramMap.get('id');
@@ -63,7 +64,7 @@ export class CaseComponent implements OnInit {
     const userId = JSON.parse(localStorage.getItem('user')!).userId;
     if (userId)
     {
-      this.caseService.unbox(caseId, userId).subscribe(
+      this.userService.unbox(caseId, userId).subscribe(
         {
           next: response => {this.skin = response
             console.log(response);

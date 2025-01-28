@@ -24,8 +24,8 @@ export class CaseserviceService {
     return this.http.get(BASE_URL + "getCases");
    }
 
-   unbox(caseId:number, userId: number) : Observable<any>
-   {
-    return this.http.get(BASE_URL + `unbox/${userId}/${caseId}`);
-   }
+  //  unbox(caseId:number, userId: number) : Observable<any>
+  //  {
+  //   return this.http.get(BASE_URL + `unbox/${userId}/${caseId}`);
+  //  }
 }

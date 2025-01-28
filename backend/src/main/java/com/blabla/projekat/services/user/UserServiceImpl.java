@@ -1,17 +1,20 @@
-package com.blabla.projekat.services.jwt;
+package com.blabla.projekat.services.user;
 
 import com.blabla.projekat.dto.UserDTO;
+import com.blabla.projekat.entities.Skin;
 import com.blabla.projekat.entities.User;
 import com.blabla.projekat.repositories.CaseRepository;
 import com.blabla.projekat.repositories.ItemRepository;
+import com.blabla.projekat.repositories.SkinRepository;
 import com.blabla.projekat.repositories.UserRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -20,11 +23,13 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final CaseRepository caseRepository;
     private final ItemRepository itemRepository;
+    private final SkinRepository skinRepository;
 
-    public UserServiceImpl(UserRepository userRepository, CaseRepository caseRepository, ItemRepository itemRepository) {
+    public UserServiceImpl(UserRepository userRepository, CaseRepository caseRepository, ItemRepository itemRepository, SkinRepository skinRepository) {
         this.userRepository = userRepository;
         this.caseRepository = caseRepository;
         this.itemRepository = itemRepository;
+        this.skinRepository = skinRepository;
     }
 
     @Override
@@ -52,6 +57,37 @@ public class UserServiceImpl implements UserService{
 
         }
         return userDTO;
+    }
+
+    @Override
+    public Boolean sellSkin(Long skinId, Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        Optional<Skin> optionalSkin = skinRepository.findById(skinId);
+        if (optionalUser.isPresent() && optionalSkin.isPresent())
+        {
+            List<Skin> skinList = optionalUser.get().getSkins().stream().filter(x -> x.getId() == skinId).collect(Collectors.toList());
+            if (!skinList.isEmpty()) {
+                optionalUser.get().setBalance(optionalUser.get().getBalance() + optionalSkin.get().getPrice());
+                skinRepository.deleteById(skinId);
+                userRepository.save(optionalUser.get());
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean addBalance(Long userId, Double balance) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isPresent())
+        {
+            optionalUser.get().setBalance(optionalUser.get().getBalance() + balance);
+            userRepository.save(optionalUser.get());
+
+            return true;
+        }
+        return false;
     }
 
 }

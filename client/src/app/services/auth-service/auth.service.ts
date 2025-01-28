@@ -48,4 +48,46 @@ export class AuthService {
   setCurrentUser(user: UserBasic){
     this.user.next(user);
   }
+  
+  getUserId()
+  {
+    let userId;
+    const user = localStorage.getItem('user');
+    if (user)
+    {
+      userId = JSON.parse(user).userId;
+    }
+
+    if(userId)
+      return userId;
+    return null;
+  }
+
+  getUserRole()
+  {
+    let userRole;
+    const user = localStorage.getItem('user');
+    if (user)
+    {
+      userRole = JSON.parse(user).userRole;
+    }
+
+    if(userRole)
+      return userRole;
+    return null;
+  }
+
+  getUserToken()
+  {
+    let token;
+    const user = localStorage.getItem('user');
+    if (user)
+    {
+      token = JSON.parse(user).jwt;
+    }
+
+    if(token)
+      return token;
+    return null;
+  }
 }
