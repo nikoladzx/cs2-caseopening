@@ -1,14 +1,14 @@
 package com.blabla.projekat.controllers;
 
 
-import com.blabla.projekat.dto.CaseDTO;
-import com.blabla.projekat.dto.ItemDTO;
-import com.blabla.projekat.dto.SkinDTO;
+import com.blabla.projekat.dto.*;
 import com.blabla.projekat.repositories.CaseRepository;
 import com.blabla.projekat.repositories.UserRepository;
+import com.blabla.projekat.services.bet.BetService;
 import com.blabla.projekat.services.cases.CaseService;
 import com.blabla.projekat.services.user.UserService;
 import com.blabla.projekat.services.skin.SkinService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +23,15 @@ public class UserController {
     private final UserService userService;
     private final CaseService caseService;
     private final SkinService skinService;
+    private final BetService betService;
 
     @Autowired
-    public UserController(UserService userService, CaseService caseService, SkinService skinService) {
+    public UserController(UserService userService, CaseService caseService, SkinService skinService, BetService betService) {
 
         this.userService = userService;
         this.caseService = caseService;
         this.skinService = skinService;
+        this.betService = betService;
     }
 
     @GetMapping("/gas")
@@ -73,6 +75,36 @@ public class UserController {
         Boolean success = userService.addBalance(userId, balance);
         if (success)
             return ResponseEntity.ok(success);
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/getProfile/{userId}")
+    public ResponseEntity<ProfileDTO> getProfile(@PathVariable Long userId)
+    {
+        ProfileDTO profileDTO = userService.getProfile(userId);
+        if (profileDTO != null)
+            return ResponseEntity.ok(profileDTO);
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/coinflip")
+    public ResponseEntity<String> coinflip(@RequestBody
+    CoinFlipRequest coinFlipRequest)
+    {
+
+        String coinflip = betService.coinflip(coinFlipRequest);
+        if (coinflip == "WIN" || coinflip== "LOSE")
+            return ResponseEntity.ok(coinflip);
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/crash")
+    public ResponseEntity<Double> crash(@RequestBody
+                                           CrashRequest crashRequest)
+    {
+        Double crashMultiplier = betService.crash(crashRequest);
+        if (crashMultiplier != null)
+            return ResponseEntity.ok(crashMultiplier);
         return ResponseEntity.badRequest().build();
     }
 

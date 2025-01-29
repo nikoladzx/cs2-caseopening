@@ -19,6 +19,18 @@ export class InventoryComponent implements OnInit {
     this.getSkins();
 
   }
+  getWear(condition: number)
+  {
+    if (condition< 0.07)
+      return "(Factory-New)";
+    if (condition<0.15)
+      return "(Minimal-Wear)";
+    if (condition<0.38)
+      return "(Field-Tested)";
+    if (condition<0.45)
+      return "(Well-Worn)"
+    return "(Battle-Scarred)"
+  }
 
   getSkins()
   {
@@ -28,6 +40,20 @@ export class InventoryComponent implements OnInit {
     this.userService.getSkins(userId).subscribe({
       next: response => this.skins=response,
       error: error => console.log(error)
+    })
+  }
+
+  sellSkin(skinId : any)
+  {
+    console.log("ovo je skinid" + skinId)
+    const userId = this.authService.getUserId();
+    if (userId === null)
+      return;
+    this.userService.sellSkin(userId, skinId).subscribe({
+      next: response => console.log(response),
+      error: error => console.log(error),
+      complete: () => this.getSkins()
+
     })
   }
 

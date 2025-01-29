@@ -70,6 +70,7 @@ public class Skin {
     public SkinDTO skinDTO()
     {
         SkinDTO skinDTO = new SkinDTO();
+        skinDTO.setId(id);
         skinDTO.setName(item.getName());
         skinDTO.setType(item.getType());
         skinDTO.setImg(item.getImg());

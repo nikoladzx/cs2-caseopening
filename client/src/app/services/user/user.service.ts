@@ -42,6 +42,13 @@ constructor(private http: HttpClient, private authService : AuthService) {
     const headers = new HttpHeaders({ 'Authorization' : `Bearer ${token}`});
     return this.http.post(BASE_URL+`addBalance/${userId}/${balance}`, {}, {headers});
    }
+
+   getProfile(userId: number) :Observable<any>
+   {
+    const token = this.authService.getUserToken();
+    const headers = new HttpHeaders({ 'Authorization' : `Bearer ${token}`});
+    return this.http.get(BASE_URL+`getProfile/${userId}`, {headers});
+   }
   
   
   

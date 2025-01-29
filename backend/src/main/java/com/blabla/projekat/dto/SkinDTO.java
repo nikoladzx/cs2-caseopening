@@ -4,12 +4,21 @@ import com.blabla.projekat.enums.Type;
 import org.springframework.web.multipart.MultipartFile;
 
 public class SkinDTO {
+    private Long id;
     private byte[] img;
     private String name;
     private Double price;
     private Type type;
     private Double condition;
     private Boolean stattrak;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public byte[] getImg() {
         return img;

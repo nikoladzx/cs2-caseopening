@@ -1,5 +1,6 @@
 package com.blabla.projekat.services.user;
 
+import com.blabla.projekat.dto.ProfileDTO;
 import com.blabla.projekat.dto.UserDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -9,4 +10,5 @@ public interface UserService {
     UserDTO getUser(Long id);
     Boolean sellSkin(Long skinId, Long userId);
     Boolean addBalance(Long userId, Double balance);
+    ProfileDTO getProfile(Long userId);
 }
