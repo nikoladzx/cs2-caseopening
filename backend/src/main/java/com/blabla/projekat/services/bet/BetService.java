@@ -1,10 +1,10 @@
 package com.blabla.projekat.services.bet;
 
-import com.blabla.projekat.dto.CoinFlipRequest;
-import com.blabla.projekat.dto.CrashRequest;
+import com.blabla.projekat.dto.*;
 import org.springframework.stereotype.Service;
 
 public interface BetService {
-    String coinflip(CoinFlipRequest coinFlipRequest);
-    Double crash(CrashRequest crashRequest);
+    CoinflipResponse coinflip(CoinFlipRequest coinFlipRequest);
+    CrashResponse crash(CrashRequest crashRequest);
+    RouletteResponse roulette(RouletteRequest rouletteRequest);
 }

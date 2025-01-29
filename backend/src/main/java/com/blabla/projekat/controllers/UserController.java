@@ -88,23 +88,33 @@ public class UserController {
     }
 
     @PostMapping("/coinflip")
-    public ResponseEntity<String> coinflip(@RequestBody
+    public ResponseEntity<CoinflipResponse> coinflip(@RequestBody
     CoinFlipRequest coinFlipRequest)
     {
 
-        String coinflip = betService.coinflip(coinFlipRequest);
-        if (coinflip == "WIN" || coinflip== "LOSE")
-            return ResponseEntity.ok(coinflip);
+        CoinflipResponse response = betService.coinflip(coinFlipRequest);
+        if (response != null)
+            return ResponseEntity.ok(response);
         return ResponseEntity.badRequest().build();
     }
 
     @PostMapping("/crash")
-    public ResponseEntity<Double> crash(@RequestBody
+    public ResponseEntity<CrashResponse> crash(@RequestBody
                                            CrashRequest crashRequest)
     {
-        Double crashMultiplier = betService.crash(crashRequest);
-        if (crashMultiplier != null)
-            return ResponseEntity.ok(crashMultiplier);
+        CrashResponse response = betService.crash(crashRequest);
+        if (response != null)
+            return ResponseEntity.ok(response);
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PostMapping("/roulette")
+    public ResponseEntity<RouletteResponse> roulette(@RequestBody
+                                               RouletteRequest rouletteRequest)
+    {
+        RouletteResponse response = betService.roulette(rouletteRequest);
+        if (response != null)
+            return ResponseEntity.ok(response);
         return ResponseEntity.badRequest().build();
     }
 

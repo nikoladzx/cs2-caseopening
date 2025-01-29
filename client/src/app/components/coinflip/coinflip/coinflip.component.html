@@ -1,0 +1,52 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header bg-dark text-white text-center">
+            <h3>COINFLIP</h3>
+          </div>
+          <div class="card-body">
+
+            <div class="mb-3" *ngIf="coinflipResponse===null">
+              <img  src="https://st4.depositphotos.com/1203063/20920/i/450/depositphotos_209203500-stock-photo-gold-coin-sign-isolated-white.jpg">
+             
+            </div>
+            <div class="mb-3" *ngIf="coinflipResponse?.heads === true">
+                <img  src="https://m.media-amazon.com/images/I/51xs7F+tP5L._AC_UF894,1000_QL80_.jpg">
+               
+              </div>
+              <div class="mb-3" *ngIf="coinflipResponse?.heads === false">
+                <img  src="https://media.istockphoto.com/id/476142091/photo/quarter-dollar-us-coin-isolated-on-white.jpg?s=612x612&w=0&k=20&c=wNzr7m0Z3dhlf8_O1G3EFNz8u2tALVobVs4K4XfFN5c=">
+               
+              </div>
+            <div class="mb-3">
+              <label for="bet" class="form-label">Your bet</label>
+              <input
+                type="number"
+                class="form-control"
+                id="bet"
+                name="bet"
+                [(ngModel)]="bet"  
+                required
+              />
+            </div>
+            <button
+              type="button"
+              class="btn btn-dark w-50"
+              (click)="placeBet(true)"  
+            >
+              Head
+            </button>
+            <button
+              type="button"
+              class="btn btn-dark w-50"
+              (click)="placeBet(false)"  
+            >
+              Tail
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

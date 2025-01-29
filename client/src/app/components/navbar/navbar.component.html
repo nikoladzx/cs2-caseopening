@@ -9,6 +9,15 @@
           <button class="nav-link" routerLink="/" >Cases</button>
       </li>
       <li class="nav-item" *ngIf="user$ | async">
+        <button class="nav-link" routerLink="/coinflip" >Coinflip</button>
+    </li>
+    <li class="nav-item" *ngIf="user$ | async">
+      <button class="nav-link" routerLink="/crash" >Crash</button>
+  </li>
+  <li class="nav-item" *ngIf="user$ | async">
+    <button class="nav-link" routerLink="/roulette" >Roulette</button>
+  </li>
+      <li class="nav-item" *ngIf="user$ | async">
           <button class="nav-link" routerLink="/inventory" >Inventory</button>
       </li>
     </ul>

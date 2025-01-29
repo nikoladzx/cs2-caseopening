@@ -11,6 +11,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CaseComponent } from './components/case/case.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
+import { CoinflipComponent } from './components/coinflip/coinflip/coinflip.component';
+import { CrashComponent } from './components/crash/crash/crash.component';
+import { RouletteComponent } from './components/roulette/roulette.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { InventoryComponent } from './components/inventory/inventory.component';
     NavbarComponent,
     HomeComponent,
     CaseComponent,
-    InventoryComponent
+    InventoryComponent,
+    CoinflipComponent,
+    CrashComponent,
+    RouletteComponent
   ],
   imports: [
     BrowserModule,
