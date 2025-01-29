@@ -11,7 +11,7 @@
                     <img src="https://m.media-amazon.com/images/I/51zKe56yfcL.png">
               </div>
               <div class="mb-3" *ngIf="crashResponse" style="position: relative; text-align: center;">
-                <img src="https://t3.ftcdn.net/jpg/08/05/55/06/360_F_805550644_Sn59MEhpXJlSMMhth7SLemneSNbuHXpD.jpg" style="display: block; margin-left: auto; margin-right: auto;">
+                <img src="https://m.media-amazon.com/images/I/51zKe56yfcL.png" style="display: block; margin-left: auto; margin-right: auto;">
                 <h1 [ngClass]="{'text-success': crashResponse.win, 'text-danger': !crashResponse.win}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">x{{crashResponse.multiplier}}</h1>
                 <h3 [ngClass]="{'text-success': crashResponse.win, 'text-danger': !crashResponse.win}" >{{crashResponse.win ? 'You won ' : 'You lost '}}</h3>
                 </div>

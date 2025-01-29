@@ -79,13 +79,13 @@ public class BetServiceImpl implements BetService{
                 if (crashRequest.getMultiplier()>mult)
                 {
                     optionalUser.get().setBalance(optionalUser.get().getBalance()-crashRequest.getBet());
-                    response.setWin(true);
+                    response.setWin(false);
 
 
                 }
                 if (crashRequest.getMultiplier()<mult)
                 {
-                    response.setWin(false);
+                    response.setWin(true);
                     optionalUser.get()
                             .setBalance(optionalUser.get().getBalance()+(crashRequest.getMultiplier()*crashRequest.getBet()-crashRequest.getBet()));
 
