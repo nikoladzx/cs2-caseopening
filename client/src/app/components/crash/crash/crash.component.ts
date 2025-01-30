@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrashRequest } from 'src/app/models/CrashRequest';
 import { CrashResponse } from 'src/app/models/CrashResponse';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { BetService } from 'src/app/services/bet/bet.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class CrashComponent implements OnInit {
   crashResponse: CrashResponse | null = null;
   
 
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(private userService: UserService, private betService: BetService, private authService: AuthService) { }
 
   ngOnInit(): void {
   
@@ -32,8 +33,11 @@ export class CrashComponent implements OnInit {
 
     }
 
-    this.userService.crash(this.crashRequest).subscribe({
-      next: response => this.crashResponse = response,
+    this.betService.crash(this.crashRequest).subscribe({
+      next: response => {this.crashResponse = response;
+        this.userService.triggerProfileUpdate();
+
+      },
       error: error => console.log(error)
     })
   }

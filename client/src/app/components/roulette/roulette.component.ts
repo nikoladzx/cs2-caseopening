@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouletteRequest } from 'src/app/models/RouletteRequest';
 import { RouletteResponse } from 'src/app/models/RouletteResponse';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { BetService } from 'src/app/services/bet/bet.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class RouletteComponent implements OnInit {
   betOption: string = "";
   rouletteResponse: RouletteResponse | null = null;
 
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(private betService: BetService, private userService: UserService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.betAmount = 0;
@@ -30,12 +31,13 @@ export class RouletteComponent implements OnInit {
     if (userId !==null)
     {
 
-    this.userService.roulette({
+    this.betService.roulette({
       bet: this.betAmount,
       userId:userId,
       betOption: this.betOption
     }).subscribe(response => {
       this.rouletteResponse = response;
+      this.userService.triggerProfileUpdate();
     }, error => {
       console.error(error);
     });}

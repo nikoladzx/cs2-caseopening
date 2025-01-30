@@ -20,19 +20,14 @@ import java.util.List;
 
 @RequestMapping("/api/case")
 public class CaseController {
-    private final CaseRepository caseRepository;
-    private final UserRepository userRepository;
-    private final UserService userService;
+
     private final CaseService caseService;
-    private final SkinService skinService;
+
 
     @Autowired
-    public CaseController(CaseRepository caseRepository, UserRepository userRepository, UserService userService, CaseService caseService, SkinService skinService) {
-        this.caseRepository = caseRepository;
-        this.userRepository = userRepository;
-        this.userService = userService;
+    public CaseController(CaseService caseService) {
         this.caseService = caseService;
-        this.skinService = skinService;
+
     }
 
     @GetMapping("/gas")
@@ -44,7 +39,7 @@ public class CaseController {
 
 
     @GetMapping("/getCase/{caseId}")
-    public ResponseEntity<CaseDTO> unbox(@PathVariable Long caseId)
+    public ResponseEntity<CaseDTO> getCase(@PathVariable Long caseId)
     {
         CaseDTO caseDTO = caseService.getCaseById(caseId);
         if (caseDTO!=null)
@@ -54,7 +49,7 @@ public class CaseController {
     }
 
     @GetMapping("/getCases")
-    public ResponseEntity<List<CaseDTO>> unbox()
+    public ResponseEntity<List<CaseDTO>> getCases()
     {
         List<CaseDTO> caseList = caseService.getCases();
         if (caseList!=null)

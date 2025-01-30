@@ -62,8 +62,11 @@ public class WebSecurityConfiguration {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/api/case/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/user/**").hasAuthority("USER")
+                        .requestMatchers("/api/bet/**").hasAuthority("USER")
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(manager ->

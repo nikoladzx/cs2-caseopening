@@ -6,6 +6,7 @@ import com.blabla.projekat.repositories.CaseRepository;
 import com.blabla.projekat.repositories.UserRepository;
 import com.blabla.projekat.services.bet.BetService;
 import com.blabla.projekat.services.cases.CaseService;
+import com.blabla.projekat.services.slot.SlotService;
 import com.blabla.projekat.services.user.UserService;
 import com.blabla.projekat.services.skin.SkinService;
 import org.apache.coyote.Response;
@@ -23,15 +24,16 @@ public class UserController {
     private final UserService userService;
     private final CaseService caseService;
     private final SkinService skinService;
-    private final BetService betService;
+//    private final BetService betService;
+//    private final SlotService slotService;
 
     @Autowired
-    public UserController(UserService userService, CaseService caseService, SkinService skinService, BetService betService) {
+    public UserController(UserService userService, CaseService caseService, SkinService skinService) {
 
         this.userService = userService;
         this.caseService = caseService;
         this.skinService = skinService;
-        this.betService = betService;
+
     }
 
     @GetMapping("/gas")
@@ -87,37 +89,35 @@ public class UserController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PostMapping("/coinflip")
-    public ResponseEntity<CoinflipResponse> coinflip(@RequestBody
-    CoinFlipRequest coinFlipRequest)
-    {
-
-        CoinflipResponse response = betService.coinflip(coinFlipRequest);
-        if (response != null)
-            return ResponseEntity.ok(response);
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PostMapping("/crash")
-    public ResponseEntity<CrashResponse> crash(@RequestBody
-                                           CrashRequest crashRequest)
-    {
-        CrashResponse response = betService.crash(crashRequest);
-        if (response != null)
-            return ResponseEntity.ok(response);
-        return ResponseEntity.badRequest().build();
-    }
-
-    @PostMapping("/roulette")
-    public ResponseEntity<RouletteResponse> roulette(@RequestBody
-                                               RouletteRequest rouletteRequest)
-    {
-        RouletteResponse response = betService.roulette(rouletteRequest);
-        if (response != null)
-            return ResponseEntity.ok(response);
-        return ResponseEntity.badRequest().build();
-    }
-
-
+//    @PostMapping("/coinflip")
+//    public ResponseEntity<CoinflipResponse> coinflip(@RequestBody
+//    CoinFlipRequest coinFlipRequest)
+//    {
+//
+//        CoinflipResponse response = betService.coinflip(coinFlipRequest);
+//        if (response != null)
+//            return ResponseEntity.ok(response);
+//        return ResponseEntity.badRequest().build();
+//    }
+//
+//    @PostMapping("/crash")
+//    public ResponseEntity<CrashResponse> crash(@RequestBody
+//                                           CrashRequest crashRequest)
+//    {
+//        CrashResponse response = betService.crash(crashRequest);
+//        if (response != null)
+//            return ResponseEntity.ok(response);
+//        return ResponseEntity.badRequest().build();
+//    }
+//
+//    @PostMapping("/roulette")
+//    public ResponseEntity<RouletteResponse> roulette(@RequestBody
+//                                               RouletteRequest rouletteRequest)
+//    {
+//        RouletteResponse response = betService.roulette(rouletteRequest);
+//        if (response != null)
+//            return ResponseEntity.ok(response);
+//        return ResponseEntity.badRequest().build();
+//    }
 
 }

@@ -50,7 +50,7 @@ export class InventoryComponent implements OnInit {
     if (userId === null)
       return;
     this.userService.sellSkin(userId, skinId).subscribe({
-      next: response => console.log(response),
+      next: () => this.userService.triggerProfileUpdate(),
       error: error => console.log(error),
       complete: () => this.getSkins()
 

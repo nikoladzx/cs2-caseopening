@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { UserBasic } from 'src/app/models/UserBasic';
@@ -15,13 +15,15 @@ export class NavbarComponent implements OnInit {
   user$: Observable<UserBasic | null> = of(null);
   profile: Profile | null = null;
 
-  constructor(public authService: AuthService, private userService: UserService) { }
+  constructor(public authService: AuthService, private userService: UserService,  private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     console.log(this.user$ + "ovo je prvo")
     this.user$ = this.authService.user$;
     this.getProfile();
     console.log(this.user$ + "ovo je drugo");
+    this.userService.profileUpdated$.subscribe(()=> 
+    this.getProfile());
   }
 
   logout()
@@ -33,7 +35,9 @@ export class NavbarComponent implements OnInit {
   {
     const userId = this.authService.getUserId();
     this.userService.getProfile(userId).subscribe({
-      next: response => this.profile=response,
+      next: response => {this.profile=response;
+        this.cdr.detectChanges();
+      },
       error: error => console.log(error)
     })
   }

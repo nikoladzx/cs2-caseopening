@@ -68,7 +68,7 @@ export class CaseComponent implements OnInit {
         {
           next: response => {this.skin = response
             console.log(response);
-            console.log(this.skin);
+            this.userService.triggerProfileUpdate();
           },
           error: error => console.log(error)
 

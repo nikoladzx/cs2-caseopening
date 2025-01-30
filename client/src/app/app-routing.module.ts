@@ -9,6 +9,8 @@ import { InventoryComponent } from './components/inventory/inventory.component';
 import { CoinflipComponent } from './components/coinflip/coinflip/coinflip.component';
 import { CrashComponent } from './components/crash/crash/crash.component';
 import { RouletteComponent } from './components/roulette/roulette.component';
+import { SlotpageComponent } from './pages/slotpage/slotpage.component';
+import { SlotComponent } from './components/slot/slot/slot.component';
 
 const routes: Routes = [
   {path:"login", component: LoginComponent},
@@ -18,7 +20,9 @@ const routes: Routes = [
   {path:"inventory", component:InventoryComponent},
   {path:"coinflip", component:CoinflipComponent},
   {path:"crash", component:CrashComponent},
-  {path:"roulette", component:RouletteComponent}
+  {path:"roulette", component:RouletteComponent},
+  {path:"slots", component:SlotpageComponent},
+  {path:"slots/:id", component:SlotComponent}
 ];
 
 @NgModule({

@@ -5,8 +5,7 @@
           <img class="card-img-top" src="data:image/jpeg;base64,{{case.returnedImg}}" alt="Card image cap" style="width: 250; height: 350px;">
           <div class="card-body">
             <h5 class="card-title">{{ case.name }}</h5>
-            <p class="card-text">Price: {{ case.price }}</p>
-            <p class="card-text">Price: {{ case.id }}</p>
+            <p class="card-text">Price: {{ case.price }}$</p>
             <button class="btn btn-primary mt-2" [routerLink]="['/case', case.id]">View Case</button>
           </div>
         </div>

@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../auth-service/auth.service';
 import { CoinflipRequest } from 'src/app/models/CoinflipRequest';
 import { CrashRequest } from 'src/app/models/CrashRequest';
 import { RouletteRequest } from 'src/app/models/RouletteRequest';
+import { SlotRequest } from 'src/app/models/SlotRequest';
 
 const BASE_URL = "http://localhost:8080/api/user/";
 
@@ -13,9 +14,21 @@ const BASE_URL = "http://localhost:8080/api/user/";
   providedIn: 'root'
 })
 export class UserService {
+  private profileUpdatedSubject = new Subject<void>();
+
+  // Observable for profile updates
+  get profileUpdated$(): Observable<void> {
+    return this.profileUpdatedSubject.asObservable();
+  }
 
 constructor(private http: HttpClient, private authService : AuthService) {
     
+   }
+
+ 
+   // Method to trigger profile update
+   triggerProfileUpdate(): void {
+     this.profileUpdatedSubject.next();
    }
 
    unbox(caseId:number, userId: number) : Observable<any>
@@ -52,27 +65,4 @@ constructor(private http: HttpClient, private authService : AuthService) {
     const headers = new HttpHeaders({ 'Authorization' : `Bearer ${token}`});
     return this.http.get(BASE_URL+`getProfile/${userId}`, {headers});
    }
-   
-   coinflip(coinflipRequest : CoinflipRequest) : Observable<any>
-   {
-    const token = this.authService.getUserToken();
-    const headers = new HttpHeaders({'Authorization' : `Bearer ${token}`});
-    return this.http.post(BASE_URL+ "coinflip", coinflipRequest, {headers});
-   }
-
-   crash(crashRequest : CrashRequest) : Observable<any>
-   {
-    const token = this.authService.getUserToken();
-    const headers = new HttpHeaders({'Authorization' : `Bearer ${token}`});
-    return this.http.post(BASE_URL+ "crash", crashRequest, {headers});
-   }
-  
-   roulette(rouletteRequest : RouletteRequest) : Observable<any>
-   {
-    const token = this.authService.getUserToken();
-    const headers = new HttpHeaders({'Authorization' : `Bearer ${token}`});
-    return this.http.post(BASE_URL+ "roulette", rouletteRequest, {headers});
-   }
-  
-  
 }

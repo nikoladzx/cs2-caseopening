@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CoinflipRequest } from 'src/app/models/CoinflipRequest';
 import { CoinflipResponse } from 'src/app/models/CoinflipResponse';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { BetService } from 'src/app/services/bet/bet.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class CoinflipComponent implements OnInit {
   bet: number = 0;
   heads: boolean = false;
 
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(private userService: UserService, private betService: BetService, private authService: AuthService) { }
 
   ngOnInit(): void {}
 
@@ -29,9 +30,10 @@ export class CoinflipComponent implements OnInit {
       heads: this.heads
     };
     console.log(coinflipRequest.userId)
-    this.userService.coinflip(coinflipRequest).subscribe({
+    this.betService.coinflip(coinflipRequest).subscribe({
       next: response => {
-        this.coinflipResponse=response
+        this.coinflipResponse=response;
+        this.userService.triggerProfileUpdate();
       }
     });
   }

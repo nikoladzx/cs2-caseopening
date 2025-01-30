@@ -14,6 +14,8 @@ import { InventoryComponent } from './components/inventory/inventory.component';
 import { CoinflipComponent } from './components/coinflip/coinflip/coinflip.component';
 import { CrashComponent } from './components/crash/crash/crash.component';
 import { RouletteComponent } from './components/roulette/roulette.component';
+import { SlotComponent } from './components/slot/slot/slot.component';
+import { SlotpageComponent } from './pages/slotpage/slotpage.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { RouletteComponent } from './components/roulette/roulette.component';
     InventoryComponent,
     CoinflipComponent,
     CrashComponent,
-    RouletteComponent
+    RouletteComponent,
+    SlotComponent,
+    SlotpageComponent
   ],
   imports: [
     BrowserModule,
