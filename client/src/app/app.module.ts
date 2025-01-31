@@ -16,6 +16,7 @@ import { CrashComponent } from './components/crash/crash/crash.component';
 import { RouletteComponent } from './components/roulette/roulette.component';
 import { SlotComponent } from './components/slot/slot/slot.component';
 import { SlotpageComponent } from './pages/slotpage/slotpage.component';
+import { AddBalanceComponent } from './pages/add-balance/add-balance.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SlotpageComponent } from './pages/slotpage/slotpage.component';
     CrashComponent,
     RouletteComponent,
     SlotComponent,
-    SlotpageComponent
+    SlotpageComponent,
+    AddBalanceComponent
   ],
   imports: [
     BrowserModule,

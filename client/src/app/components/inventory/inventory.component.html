@@ -9,7 +9,7 @@
           <h6 class="card-title text-center" [style.color]="skin.stattrak ? 'orange' : ''" style="font-size: 0.9rem;">
             {{skin.stattrak ? 'Stattrak ' : ''}} {{skin.name }} {{getWear(skin.condition)}}
           </h6>
-          <button class="btn btn-dark mt-2 align-self-center" (click)="sellSkin(skin.id)">Sell for {{skin.price}}$</button>
+          <button class="btn btn-dark mt-2 align-self-center" (click)="sellSkin(skin.id)">Sell for {{skin.price.toFixed(2)}}$</button>
         </div>
       </div>
     </div>

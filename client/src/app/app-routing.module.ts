@@ -11,6 +11,7 @@ import { CrashComponent } from './components/crash/crash/crash.component';
 import { RouletteComponent } from './components/roulette/roulette.component';
 import { SlotpageComponent } from './pages/slotpage/slotpage.component';
 import { SlotComponent } from './components/slot/slot/slot.component';
+import { AddBalanceComponent } from './pages/add-balance/add-balance.component';
 
 const routes: Routes = [
   {path:"login", component: LoginComponent},
@@ -22,7 +23,8 @@ const routes: Routes = [
   {path:"crash", component:CrashComponent},
   {path:"roulette", component:RouletteComponent},
   {path:"slots", component:SlotpageComponent},
-  {path:"slots/:id", component:SlotComponent}
+  {path:"slots/:id", component:SlotComponent},
+  {path:"add-balance", component:AddBalanceComponent}
 ];
 
 @NgModule({

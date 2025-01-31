@@ -22,10 +22,10 @@
             </div>
             <div *ngIf="slotResponse" class="mt-4">
               <div *ngIf="slotResponse.win" class="alert alert-success">
-                You win! Amount: {{ slotResponse.amount }}
+                CONGRTS! You won {{ slotResponse.amount }}$
               </div>
               <div *ngIf="!slotResponse.win" class="alert alert-danger">
-                You lose! Amount: {{ slotResponse.amount }}
+                 You lost {{ slotResponse.amount }}$ :( 
               </div>
             </div>
           </div>

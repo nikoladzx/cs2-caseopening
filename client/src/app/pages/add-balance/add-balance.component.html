@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <h2>Add Balance</h2>
+        <div class="row">
+          <div class="col-6 mb-3" *ngFor="let amount of [5, 10, 25, 50, 100, 250]">
+            <button class="btn btn-dark btn-block" (click)="addBalance(amount)">
+              Add {{ amount }}$
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
