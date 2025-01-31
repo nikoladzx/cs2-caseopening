@@ -27,6 +27,6 @@ public class SkinServiceImpl implements SkinService{
             List<SkinDTO> skinList = user.get().getSkins().stream().map(Skin::skinDTO).collect(Collectors.toList());
             return skinList;
         }
-        return List.of();
+        return null;
     }
 }

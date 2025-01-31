@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 
 @RestController
 public class ImageController {
-    @GetMapping("/images/{filename}")    
+    @GetMapping("/images/{filename}")
     public ResponseEntity<UrlResource> getImage(@PathVariable String filename) {
         Path imagePath = Paths.get("F:/csgocase/slotgame1/" + filename);
         try {

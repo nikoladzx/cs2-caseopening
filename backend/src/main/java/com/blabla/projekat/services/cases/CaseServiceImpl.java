@@ -53,103 +53,97 @@ public class CaseServiceImpl implements CaseService{
     @Override
     public SkinDTO unbox(Long caseId, Long userId) {
         Optional<Case> crate = caseRepository.findById(caseId);
+        if (crate.isEmpty())
+            return null;
         Optional<User> user = userRepository.findById(userId);
-        if (crate.isPresent() && user.isPresent())
-        {
-            if (user.get().getBalance() < crate.get().getPrice())
-                return null;
-
-            user.get().setBalance(user.get().getBalance()-crate.get().getPrice() );
-            Type selectedType = determineItemType();
-
-
-            List<Item> possibleItems = crate.get().getItems().stream()
-                    .filter(item -> item.getType() == selectedType)
-                    .collect(Collectors.toList());
-
-            if (possibleItems.isEmpty()) {
-                throw new IllegalStateException("No items found for rarity: " + selectedType);
-            }
-
-
-            Item item = possibleItems.get(random.nextInt(possibleItems.size()));
-            Skin skin = new Skin();
-            skin.setItem(item);
-            skin.setUser(user.get());
-            double rollStattrak = random.nextDouble();
-            if (rollStattrak<0.1)
-                skin.setStattrak(true);
-            if (rollStattrak>0.1)
-                skin.setStattrak(false);
-            double rollCondition = random.nextDouble();
-            skin.setCondition(rollCondition);
-            double multiplier = 0.5;
-            if (rollCondition < 0.07)
-                multiplier = 3;
-            if (rollCondition> 0.07 && rollCondition < 0.15)
-                multiplier = 2;
-            if (rollCondition>0.15 && rollCondition<0.38)
-                multiplier = 1;
-            if (rollCondition>0.38 && rollCondition<0.45)
-                multiplier = 0.75;
-            skin.setPrice(item.getPrice() * (rollStattrak < 0.1 ? 2 : 1) * multiplier);
-            skinRepository.save(skin);
-            SkinDTO skinDTO = new SkinDTO();
-            skinDTO.setCondition(skin.getCondition());
-            skinDTO.setType(skin.getItem().getType());
-            skinDTO.setName(skin.getItem().getName());
-            skinDTO.setPrice(skin.getPrice());
-            skinDTO.setStattrak(skin.getStattrak());
-            skinDTO.setImg(skin.getItem().getImg());
-
-            return skinDTO;
+        if (user.isEmpty())
+            return null;
+        if (user.get().getBalance() < crate.get().getPrice())
+            return null;
+        user.get().setBalance(user.get().getBalance()-crate.get().getPrice() );
+        Type selectedType = determineItemType();
+        List<Item> possibleItems = crate.get().getItems().stream()
+                .filter(item -> item.getType() == selectedType)
+                .collect(Collectors.toList());
+        if (possibleItems.isEmpty()) {
+            throw new IllegalStateException("No items found for rarity: " + selectedType);
         }
-        return null;
+        Item item = possibleItems.get(random.nextInt(possibleItems.size()));
+        Skin skin = new Skin();
+        skin.setItem(item);
+        skin.setUser(user.get());
+        double rollStattrak = random.nextDouble();
+        if (rollStattrak<0.1)
+            skin.setStattrak(true);
+        if (rollStattrak>0.1)
+            skin.setStattrak(false);
+        double rollCondition = random.nextDouble();
+        skin.setCondition(rollCondition);
+        double multiplier = 0.5;
+        if (rollCondition < 0.07)
+            multiplier = 3;
+        if (rollCondition> 0.07 && rollCondition < 0.15)
+            multiplier = 2;
+        if (rollCondition>0.15 && rollCondition<0.38)
+            multiplier = 1;
+        if (rollCondition>0.38 && rollCondition<0.45)
+            multiplier = 0.75;
+        skin.setPrice(item.getPrice() * (rollStattrak < 0.1 ? 2 : 1) * multiplier);
+        skinRepository.save(skin);
+        SkinDTO skinDTO = new SkinDTO();
+        skinDTO.setCondition(skin.getCondition());
+        skinDTO.setType(skin.getItem().getType());
+        skinDTO.setName(skin.getItem().getName());
+        skinDTO.setPrice(skin.getPrice());
+        skinDTO.setStattrak(skin.getStattrak());
+        skinDTO.setImg(skin.getItem().getImg());
+        return skinDTO;
     }
 
     @Override
     public List<CaseDTO> getCases() {
         List<Case> caseList = caseRepository.findAll();
+        if (caseList.isEmpty())
+            return null;
         return caseList.stream().map(Case::caseDTO).collect(Collectors.toList());
     }
 
     @Override
     public CaseDTO getCaseById(Long caseId) {
+        if (caseId == null)
+            return null;
         Optional<Case> crate = caseRepository.findById(caseId);
-        if (crate.isPresent())
-        {
-            CaseDTO newCase = new CaseDTO();
-            newCase.setId(crate.get().getId());
-            newCase.setName(crate.get().getName());
-            newCase.setPrice(crate.get().getPrice());
-            //newCase.setReturnedImg(crate.get().getImg());
-            newCase.setImg(crate.get().getImg());
-
-            newCase.setItems(crate.get().getItems().stream().map(Item::itemDTO).collect(Collectors.toList()));
-            return newCase;
-        }
-        return null;
+        if (crate.isEmpty())
+            return null;
+        CaseDTO newCase = new CaseDTO();
+        newCase.setId(crate.get().getId());
+        newCase.setName(crate.get().getName());
+        newCase.setPrice(crate.get().getPrice());
+        newCase.setImg(crate.get().getImg());
+        newCase.setItems(crate.get().getItems().stream().map(Item::itemDTO).collect(Collectors.toList()));
+        return newCase;
     }
 
     @Override
     public Boolean addCase(CaseDTO caseDTO) throws IOException {
-        System.out.println("kvazaraza");
-        if (caseDTO != null) {
-            Case newCase = new Case();
-
-            newCase.setPrice(caseDTO.getPrice());
-            newCase.setName(caseDTO.getName());
-            newCase.setImg(caseDTO.getImg());
-            caseRepository.save(newCase);
-            return true;
-        }
-        return false;
+        if (caseDTO == null)
+            return false;
+        if (caseDTO.getName() == null || caseDTO.getImg()== null || caseDTO.getPrice() == null)
+            return false;
+        Case newCase = new Case();
+        newCase.setPrice(caseDTO.getPrice());
+        newCase.setName(caseDTO.getName());
+        newCase.setImg(caseDTO.getImg());
+        caseRepository.save(newCase);
+        return true;
     }
 
     @Override
     public Boolean addItem(ItemDTO itemDTO) throws IOException {
         if (itemDTO == null)
             return false;
+        if (itemDTO.getCaseId() == null || itemDTO.getImg() == null || itemDTO.getPrice()==null || itemDTO.getName() == null || itemDTO.getType() == null)
+            return null;
         Optional<Case> crate = caseRepository.findById(itemDTO.getCaseId());
         if (crate.isPresent()) {
             Item item = new Item();

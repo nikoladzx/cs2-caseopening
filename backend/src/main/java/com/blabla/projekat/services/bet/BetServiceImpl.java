@@ -20,86 +20,67 @@ public class BetServiceImpl implements BetService{
 
     @Override
     public CoinflipResponse coinflip(CoinFlipRequest coinFlipRequest) {
-        System.out.println(coinFlipRequest.getUserId());
-        System.out.println(coinFlipRequest.getBet());
-        System.out.println(coinFlipRequest.getHeads());
-
         Optional<User> optionalUser = userRepository.findById(coinFlipRequest.getUserId());
+        if (optionalUser.isEmpty())
+            return null;
+        if (optionalUser.get().getBalance()<coinFlipRequest.getBet()  || coinFlipRequest.getBet()<0.01)
+            return null;
         CoinflipResponse response = new CoinflipResponse();
-        if (optionalUser.isPresent())
+
+        Random random = new Random();
+        boolean randomBoolean = random.nextBoolean();
+        if (randomBoolean == coinFlipRequest.getHeads())
         {
-            if (optionalUser.get().getBalance()>coinFlipRequest.getBet()  && coinFlipRequest.getBet()>0.0)
-            {
-                //optionalUser.get().setBalance(optionalUser.get().getBalance()-bet);
-                Random random = new Random();
-                boolean randomBoolean = random.nextBoolean();
-                if (randomBoolean == coinFlipRequest.getHeads())
-                {
-                    optionalUser.get().setBalance(optionalUser.get().getBalance()+coinFlipRequest.getBet());
-                    response.setWin(true);
-
-                }
-                if (randomBoolean != coinFlipRequest.getHeads())
-                {
-                    optionalUser.get().setBalance(optionalUser.get().getBalance()-coinFlipRequest.getBet());
-                    response.setWin(false);
-
-                }
-                userRepository.save(optionalUser.get());
-                if (randomBoolean)
-                    response.setHeads(true);
-
-                else response.setHeads(false);
-
-                return response;
-
-            }
+            optionalUser.get().setBalance(optionalUser.get().getBalance()+coinFlipRequest.getBet());
+            response.setWin(true);
         }
-        return null;
+        if (randomBoolean != coinFlipRequest.getHeads())
+        {
+            optionalUser.get().setBalance(optionalUser.get().getBalance()-coinFlipRequest.getBet());
+            response.setWin(false);
+        }
+        userRepository.save(optionalUser.get());
+        if (randomBoolean)
+            response.setHeads(true);
+        else response.setHeads(false);
+        return response;
+
     }
 
     @Override
     public CrashResponse crash(CrashRequest crashRequest) {
         Optional<User> optionalUser = userRepository.findById(crashRequest.getUserId());
+        if (optionalUser.isEmpty())
+            return null;
+        if (optionalUser.get().getBalance()>crashRequest.getBet() || crashRequest.getBet()<0.01)
+            return null;
+
+
         Random random = new Random();
-        Double mult = 10.0;
+        Double mult = 100.0;
         CrashResponse response = new CrashResponse();
-        if (optionalUser.isPresent())
+        for (int i=0; i<4; i++)
         {
-            if (optionalUser.get().getBalance()>crashRequest.getBet() && crashRequest.getBet()>0.0)
-            {
-                //optionalUser.get().setBalance(optionalUser.get().getBalance()-bet);
-
-                for (int i=0; i<2; i++)
-                {
-                    Double randomDouble = random.nextDouble();
-                    mult*=randomDouble;
-                }
-                if (mult<1)
-                    mult=1.0;
-                response.setMultiplier(mult);
-                if (crashRequest.getMultiplier()>mult)
-                {
-                    optionalUser.get().setBalance(optionalUser.get().getBalance()-crashRequest.getBet());
-                    response.setWin(false);
-
-
-                }
-                if (crashRequest.getMultiplier()<mult)
-                {
-                    response.setWin(true);
-                    optionalUser.get()
-                            .setBalance(optionalUser.get().getBalance()+(crashRequest.getMultiplier()*crashRequest.getBet()-crashRequest.getBet()));
-
-                }
-                userRepository.save(optionalUser.get());
-
-                return response;
-
-            }
+            Double randomDouble = random.nextDouble();
+            mult*=randomDouble;
+        }
+        if (mult<1)
+            mult=1.0;
+        response.setMultiplier(mult);
+        if (crashRequest.getMultiplier()>mult)
+        {
+            optionalUser.get().setBalance(optionalUser.get().getBalance()-crashRequest.getBet());
+            response.setWin(false);
+        }
+        if (crashRequest.getMultiplier()<mult)
+        {
+            response.setWin(true);
+            optionalUser.get()
+                    .setBalance(optionalUser.get().getBalance()+(crashRequest.getMultiplier()*crashRequest.getBet()-crashRequest.getBet()));
 
         }
-        return null;
+        userRepository.save(optionalUser.get());
+        return response;
     }
 
     @Override
@@ -108,41 +89,37 @@ public class BetServiceImpl implements BetService{
         System.out.println(rouletteRequest.getBet());
         System.out.println(rouletteRequest.getBetOption());
         Optional<User> optionalUser = userRepository.findById(rouletteRequest.getUserId());
+        if (optionalUser.isEmpty())
+            return null;
+        if (optionalUser.get().getBalance()< rouletteRequest.getBet()  || rouletteRequest.getBet()<0.01)
+            return null;
         Random random = new Random();
         RouletteResponse rouletteResponse = new RouletteResponse();
         rouletteResponse.setWin(false);
-        if (optionalUser.isPresent())
+        optionalUser.get().setBalance(optionalUser.get().getBalance() - rouletteRequest.getBet() );
+        Long drawnNumber = random.nextLong(37);
+        if (drawnNumber==0 && rouletteRequest.getBetOption().equals("green"))
         {
-            if (optionalUser.get().getBalance()> rouletteRequest.getBet()  && rouletteRequest.getBet()>0.0)
-            {
+            optionalUser.get().setBalance(optionalUser.get().getBalance() + rouletteRequest.getBet()*36);
+            rouletteResponse.setWin(true);
+        }
 
+        else if (drawnNumber%2 == 0 && rouletteRequest.getBetOption().equals("black") && drawnNumber!=0)
+        {
+            optionalUser.get().setBalance(optionalUser.get().getBalance() + rouletteRequest.getBet()*2);
+            rouletteResponse.setWin(true);
+        }
 
-            optionalUser.get().setBalance(optionalUser.get().getBalance() - rouletteRequest.getBet() );
-            Long drawnNumber = random.nextLong(37);
-            if (drawnNumber==0 && rouletteRequest.getBetOption().equals("green"))
-            {
-                optionalUser.get().setBalance(optionalUser.get().getBalance() + rouletteRequest.getBet()*36);
-                rouletteResponse.setWin(true);
-            }
+        else if (drawnNumber%2 == 1 && rouletteRequest.getBetOption().equals("red"))
+        {
+            optionalUser.get().setBalance(optionalUser.get().getBalance() + rouletteRequest.getBet()*2);
+            rouletteResponse.setWin(true);
 
-            else if (drawnNumber%2 == 0 && rouletteRequest.getBetOption().equals("black") && drawnNumber!=0)
-            {
-                optionalUser.get().setBalance(optionalUser.get().getBalance() + rouletteRequest.getBet()*2);
-                rouletteResponse.setWin(true);
-            }
+        }
+        rouletteResponse.setDrawnNumber(drawnNumber);
+        rouletteResponse.setDrawnColor(drawnNumber==0 ? "green" : drawnNumber%2==0 ? "black" : "red");
 
-            else if (drawnNumber%2 == 1 && rouletteRequest.getBetOption().equals("red"))
-            {
-                optionalUser.get().setBalance(optionalUser.get().getBalance() + rouletteRequest.getBet()*2);
-                rouletteResponse.setWin(true);
-
-            }
-            rouletteResponse.setDrawnNumber(drawnNumber);
-            rouletteResponse.setDrawnColor(drawnNumber==0 ? "green" : drawnNumber%2==0 ? "black" : "red");
-
-            userRepository.save(optionalUser.get());
-            return rouletteResponse;
-        }}
-        return null;
+        userRepository.save(optionalUser.get());
+        return rouletteResponse;
     }
 }

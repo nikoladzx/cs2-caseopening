@@ -36,88 +36,50 @@ public class UserController {
 
     }
 
-    @GetMapping("/gas")
-    public ResponseEntity<?> res()
-    {
-        return ResponseEntity.ok("jeeej");
-    }
-
-
     @GetMapping("/unbox/{userId}/{caseId}")
-    public ResponseEntity<SkinDTO> unbox(@PathVariable Long userId, @PathVariable Long caseId)
+    public ResponseEntity<Object> unbox(@PathVariable Long userId, @PathVariable Long caseId)
     {
         SkinDTO skin = caseService.unbox(caseId, userId);
         if (skin!=null)
             return ResponseEntity.ok(skin);
-        return ResponseEntity.badRequest().build();
-
+        return ResponseEntity.badRequest().body("Failed to unbox a case for user id: " + userId + " and caseId : " + caseId);
     }
 
     @GetMapping("/getSkins/{userId}")
-    public ResponseEntity<List<SkinDTO>> getSkins(@PathVariable Long userId)
+    public ResponseEntity<Object> getSkins(@PathVariable Long userId)
     {
         List<SkinDTO> skins = skinService.getSkins(userId);
         if (skins!=null)
             return ResponseEntity.ok(skins);
-        return ResponseEntity.badRequest().build();
-
+        return ResponseEntity.badRequest().body("Failed to get skins for user with id : "+ userId);
     }
 
     @DeleteMapping("/sellSkin/{userId}/{skinId}")
-    public ResponseEntity<Boolean> sellSkin(@PathVariable Long userId, @PathVariable Long skinId)
+    public ResponseEntity<Object> sellSkin(@PathVariable Long userId, @PathVariable Long skinId)
     {
         Boolean success = userService.sellSkin(skinId, userId);
         if (success)
             return ResponseEntity.ok(success);
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to sell a skin for user id: " + userId + " with skinId : " + skinId);
+
     }
     @PostMapping("/addBalance/{userId}/{balance}")
-    public ResponseEntity<Boolean> addBalance(@PathVariable Long userId, @PathVariable Double balance)
+    public ResponseEntity<Object> addBalance(@PathVariable Long userId, @PathVariable Double balance)
     {
         Boolean success = userService.addBalance(userId, balance);
         if (success)
             return ResponseEntity.ok(success);
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to add balance for user with user id: " + userId + " balance amount was : " + balance);
     }
 
     @GetMapping("/getProfile/{userId}")
-    public ResponseEntity<ProfileDTO> getProfile(@PathVariable Long userId)
+    public ResponseEntity<Object> getProfile(@PathVariable Long userId)
     {
         ProfileDTO profileDTO = userService.getProfile(userId);
         if (profileDTO != null)
             return ResponseEntity.ok(profileDTO);
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to get profile info for user with userId : " + userId);
     }
 
-//    @PostMapping("/coinflip")
-//    public ResponseEntity<CoinflipResponse> coinflip(@RequestBody
-//    CoinFlipRequest coinFlipRequest)
-//    {
-//
-//        CoinflipResponse response = betService.coinflip(coinFlipRequest);
-//        if (response != null)
-//            return ResponseEntity.ok(response);
-//        return ResponseEntity.badRequest().build();
-//    }
-//
-//    @PostMapping("/crash")
-//    public ResponseEntity<CrashResponse> crash(@RequestBody
-//                                           CrashRequest crashRequest)
-//    {
-//        CrashResponse response = betService.crash(crashRequest);
-//        if (response != null)
-//            return ResponseEntity.ok(response);
-//        return ResponseEntity.badRequest().build();
-//    }
-//
-//    @PostMapping("/roulette")
-//    public ResponseEntity<RouletteResponse> roulette(@RequestBody
-//                                               RouletteRequest rouletteRequest)
-//    {
-//        RouletteResponse response = betService.roulette(rouletteRequest);
-//        if (response != null)
-//            return ResponseEntity.ok(response);
-//        return ResponseEntity.badRequest().build();
-//    }
 
 }

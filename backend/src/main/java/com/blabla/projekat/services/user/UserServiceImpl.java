@@ -49,38 +49,31 @@ public class UserServiceImpl implements UserService{
     public UserDTO getUser(Long id) {
         Optional<User> user = userRepository.findById(id);
         UserDTO userDTO = new UserDTO();
-        if (user.isPresent())
-        {
-
-            userDTO.setUserRole(user.get().getUserRole());
-            userDTO.setId(user.get().getId());
-            userDTO.setEmail(user.get().getEmail());
-            userDTO.setName(user.get().getName());
-
-        }
+        if (user.isEmpty())
+            return null;
+        userDTO.setUserRole(user.get().getUserRole());
+        userDTO.setId(user.get().getId());
+        userDTO.setEmail(user.get().getEmail());
+        userDTO.setName(user.get().getName());
         return userDTO;
     }
 
     @Override
     public Boolean sellSkin(Long skinId, Long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
+        if (optionalUser.isEmpty())
+            return null;
         Optional<Skin> optionalSkin = skinRepository.findById(skinId);
-        if (optionalUser.isPresent() && optionalSkin.isPresent())
-        {
-            List<Skin> skinList = optionalUser.get().getSkins().stream().filter(x -> x.getId() == skinId).collect(Collectors.toList());
-            if (!skinList.isEmpty()) {
-                optionalUser.get().setBalance(optionalUser.get().getBalance() + optionalSkin.get().getPrice());
-                optionalUser.get().getSkins().remove(optionalSkin.get());
-                //skinRepository.deleteById(skinId);
-                skinRepository.delete(optionalSkin.get());
-
-
-                userRepository.save(optionalUser.get());
-                return true;
-            }
-
-        }
-        return false;
+        if (optionalSkin.isEmpty())
+            return null;
+        List<Skin> skinList = optionalUser.get().getSkins().stream().filter(x -> x.getId() == skinId).collect(Collectors.toList());
+        if (skinList.isEmpty())
+            return null;
+        optionalUser.get().setBalance(optionalUser.get().getBalance() + optionalSkin.get().getPrice());
+        optionalUser.get().getSkins().remove(optionalSkin.get());
+        skinRepository.delete(optionalSkin.get());
+        userRepository.save(optionalUser.get());
+        return true;
     }
 
     @Override
@@ -90,7 +83,6 @@ public class UserServiceImpl implements UserService{
         {
             optionalUser.get().setBalance(optionalUser.get().getBalance() + balance);
             userRepository.save(optionalUser.get());
-
             return true;
         }
         return false;

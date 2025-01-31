@@ -22,39 +22,29 @@ import java.util.List;
 public class CaseController {
 
     private final CaseService caseService;
-
-
     @Autowired
     public CaseController(CaseService caseService) {
         this.caseService = caseService;
 
     }
 
-    @GetMapping("/gas")
-    public ResponseEntity<?> res()
-    {
-        return ResponseEntity.ok("jeeej");
-    }
-
-
-
     @GetMapping("/getCase/{caseId}")
-    public ResponseEntity<CaseDTO> getCase(@PathVariable Long caseId)
+    public ResponseEntity<Object> getCase(@PathVariable Long caseId)
     {
         CaseDTO caseDTO = caseService.getCaseById(caseId);
         if (caseDTO!=null)
             return ResponseEntity.ok(caseDTO);
-        return ResponseEntity.badRequest().build();
-
+        return ResponseEntity.badRequest().body("Failed to get a case for id : " + caseId);
     }
 
     @GetMapping("/getCases")
-    public ResponseEntity<List<CaseDTO>> getCases()
+    public ResponseEntity<Object> getCases()
     {
         List<CaseDTO> caseList = caseService.getCases();
         if (caseList!=null)
             return ResponseEntity.ok(caseList);
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to get list of cases");
+
 
     }
 

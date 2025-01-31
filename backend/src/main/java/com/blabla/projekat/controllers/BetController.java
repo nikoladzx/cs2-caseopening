@@ -24,7 +24,7 @@ public class BetController {
     }
 
     @GetMapping("/getSlots")
-    public ResponseEntity<List<SlotDTO>> getSlots()
+    public ResponseEntity<Object> getSlots()
     {
         List<SlotDTO> slotDTOList = slotService.getSlots();
         if (slotDTOList != null)
@@ -32,11 +32,11 @@ public class BetController {
             return ResponseEntity.ok(slotDTOList);
 
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to get list of all slots");
     }
 
     @GetMapping("/getSlot/{slotId}")
-    public ResponseEntity<List<SlotItemDTO>> getSlot(@PathVariable Long slotId)
+    public ResponseEntity<Object> getSlot(@PathVariable Long slotId)
     {
         List<SlotItemDTO> slotItemDTOList = slotService.getSlotItems(slotId);
         if (slotItemDTOList != null)
@@ -44,22 +44,21 @@ public class BetController {
             return ResponseEntity.ok(slotItemDTOList);
 
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to get a slot for id : " + slotId);
     }
 
     @PostMapping("/slot")
-    public ResponseEntity<SlotResponse> slot(@RequestBody SlotRequest slotRequest)
+    public ResponseEntity<Object> slot(@RequestBody SlotRequest slotRequest)
     {
         SlotResponse response = slotService.playSlot(slotRequest);
         if (response != null)
         {
             return ResponseEntity.ok(response);
-
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to start a slot");
     }
     @PostMapping("/coinflip")
-    public ResponseEntity<CoinflipResponse> coinflip(@RequestBody
+    public ResponseEntity<Object> coinflip(@RequestBody
                                                      CoinFlipRequest coinFlipRequest)
     {
         System.out.println("gasblabla");
@@ -69,26 +68,26 @@ public class BetController {
         System.out.println("gk");
         if (response != null)
             return ResponseEntity.ok(response);
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to start a coinflip game");
     }
 
     @PostMapping("/crash")
-    public ResponseEntity<CrashResponse> crash(@RequestBody
+    public ResponseEntity<Object> crash(@RequestBody
                                                CrashRequest crashRequest)
     {
         CrashResponse response = betService.crash(crashRequest);
         if (response != null)
             return ResponseEntity.ok(response);
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to start a crash game");
     }
 
     @PostMapping("/roulette")
-    public ResponseEntity<RouletteResponse> roulette(@RequestBody
+    public ResponseEntity<Object> roulette(@RequestBody
                                                      RouletteRequest rouletteRequest)
     {
         RouletteResponse response = betService.roulette(rouletteRequest);
         if (response != null)
             return ResponseEntity.ok(response);
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().body("Failed to start a roulette game");
     }
 }
