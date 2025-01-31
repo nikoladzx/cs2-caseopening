@@ -3,8 +3,7 @@ import { Item } from "./Item";
 export interface Case {
     id: number;
     name: string;
-    img: File;
-    returnedImg: Uint8Array;
+    img: string;
     price: number;
     items: Item[];
 }

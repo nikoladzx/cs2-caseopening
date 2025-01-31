@@ -1,1 +1,34 @@
-<p>admin-case-item works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2>Add Case Item</h2>
+        <form (submit)="onSubmit($event)">
+          <div class="form-group">
+            <label for="slotName">Name</label>
+            <input type="text" id="itemName" class="form-control" [(ngModel)]="item.name" name="itemName" required>
+          </div>
+          <div class="form-group">
+            <label for="itemPrice">Item Price</label>
+            <input type="text" id="itemPrice" class="form-control" [(ngModel)]="item.price" name="itemPrice" required>
+          </div>
+          <div class="form-group">
+            <label for="caseItemType">Item Type</label>
+            <select id="caseItemType" class="form-control" [(ngModel)]="item.type" name="caseItemType" required>
+              <option value="BLUE">Blue</option>
+              <option value="PURPLE">Purple</option>
+              <option value="PINK">Pink</option>
+              <option value="RED">Red</option>
+              <option value="GOLD">Gold</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="slotImageFile">Item Image</label>
+            <input type="file" id="caseItemImageFile" class="form-control" (change)="onFileChange($event)" required>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Add case item</button>
+        </form>
+        <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
+      </div>
+    </div>
+  </div>
+  

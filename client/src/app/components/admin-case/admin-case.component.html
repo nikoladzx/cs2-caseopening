@@ -1,1 +1,24 @@
-<p>admin-case works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2>Add Case</h2>
+        <form (submit)="onSubmit($event)">
+          <div class="form-group">
+            <label for="slotName">Case Name</label>
+            <input type="text" id="itemName" class="form-control" [(ngModel)]="case.name" name="itemName" required>
+          </div>
+          <div class="form-group">
+            <label for="itemPrice">Case Price</label>
+            <input type="text" id="itemPrice" class="form-control" [(ngModel)]="case.price" name="itemPrice" required>
+          </div>
+          <div class="form-group">
+            <label for="slotImageFile">Case Image</label>
+            <input type="file" id="caseItemImageFile" class="form-control" (change)="onFileChange($event)" required>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Add Case</button>
+        </form>
+        <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
+      </div>
+    </div>
+  </div>
+  

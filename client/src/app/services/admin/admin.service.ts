@@ -36,5 +36,5 @@ export class AdminService {
   addCaseItem(caseItem: Item) {
     const token = this.authService.getUserToken();
     const headers = { 'Authorization': `Bearer ${token}` };
-    return this.http.post(BASE_URL + "addCaseItem", caseItem, { headers });}
+    return this.http.post(BASE_URL + "addItem", caseItem, { headers });}
 }

@@ -2,11 +2,11 @@
     <div class="row">
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let case of caseList">
         <div class="card h-100 shadow-sm">
-          <img class="card-img-top" src="data:image/jpeg;base64,{{case.returnedImg}}" alt="Card image cap" style="width: 250; height: 350px;">
+          <img class="card-img-top" [src]="'http://localhost:8080/images/' + case.img" alt="Card image cap" style="width: 250; height: 350px;">
           <div class="card-body">
             <h5 class="card-title">{{ case.name }}</h5>
             <p class="card-text">Price: {{ case.price }}$</p>
-            <button class="btn btn-dark mt-2" [routerLink]="['/admin-case', case.id]">Add items for this case</button>
+            <button class="btn btn-dark mt-2" [routerLink]="['/admincases', case.id]">Add items for this case</button>
           </div>
         </div>
       </div>
