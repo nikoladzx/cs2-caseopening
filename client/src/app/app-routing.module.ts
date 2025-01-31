@@ -6,18 +6,19 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CaseComponent } from './components/case/case.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
-import { CoinflipComponent } from './components/coinflip/coinflip/coinflip.component';
-import { CrashComponent } from './components/crash/crash/crash.component';
+
 import { RouletteComponent } from './components/roulette/roulette.component';
 import { SlotpageComponent } from './pages/slotpage/slotpage.component';
-import { SlotComponent } from './components/slot/slot/slot.component';
+import { SlotComponent } from './components/slot/slot.component';
 import { AddBalanceComponent } from './pages/add-balance/add-balance.component';
-import { AdminCaseComponent } from './components/admin-case/admin-case.component';
-import { AdminCaseItemComponent } from './components/admin-case-item/admin-case-item.component';
-import { AdminSlotComponent } from './components/admin-slot/admin-slot.component';
-import { AdminSlotItemComponent } from './components/admin-slot-item/admin-slot-item.component';
-import { AdminSlotListComponent } from './components/admin-slot-list/admin-slot-list.component';
-import { AdminCaseListComponent } from './components/admin-case-list/admin-case-list.component';
+import { AdminCaseComponent } from './components/admin/admin-case/admin-case.component';
+import { AdminCaseItemComponent } from './components/admin/admin-case-item/admin-case-item.component';
+import { AdminSlotComponent } from './components/admin/admin-slot/admin-slot.component';
+import { AdminSlotItemComponent } from './components/admin/admin-slot-item/admin-slot-item.component';
+import { AdminSlotListComponent } from './components/admin/admin-slot-list/admin-slot-list.component';
+import { AdminCaseListComponent } from './components/admin/admin-case-list/admin-case-list.component';
+import { CrashComponent } from './components/crash/crash.component';
+import { CoinflipComponent } from './components/coinflip/coinflip.component';
 
 const routes: Routes = [
   {path:"login", component: LoginComponent},
