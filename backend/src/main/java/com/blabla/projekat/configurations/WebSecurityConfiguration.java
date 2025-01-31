@@ -65,7 +65,7 @@ public class WebSecurityConfiguration {
                         .requestMatchers("/images/**").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/user/**").hasAuthority("USER")
-                        .requestMatchers("/api/bet/**").hasAuthority("USER")
+                        .requestMatchers("/api/bet/**").hasAnyAuthority("USER", "ADMIN")
 
                         .anyRequest().authenticated()
                 )

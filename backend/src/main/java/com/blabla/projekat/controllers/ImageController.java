@@ -27,14 +27,14 @@ public class ImageController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PostMapping("/upload")
+    @PostMapping("/images/upload")
     public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
         try {
             byte[] bytes = file.getBytes();
             Path path = Paths.get("F:/csgocase/slotgame1/" + file.getOriginalFilename());
             Files.write(path, bytes);
 
-            return ResponseEntity.ok("Image uploaded successfully: " + file.getOriginalFilename());
+            return ResponseEntity.ok(file.getOriginalFilename());
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Image upload failed: " + e.getMessage());

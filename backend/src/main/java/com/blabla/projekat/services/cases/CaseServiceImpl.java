@@ -122,7 +122,8 @@ public class CaseServiceImpl implements CaseService{
             newCase.setId(crate.get().getId());
             newCase.setName(crate.get().getName());
             newCase.setPrice(crate.get().getPrice());
-            newCase.setReturnedImg(crate.get().getImg());
+            //newCase.setReturnedImg(crate.get().getImg());
+            newCase.setImg(crate.get().getImg());
 
             newCase.setItems(crate.get().getItems().stream().map(Item::itemDTO).collect(Collectors.toList()));
             return newCase;
@@ -138,7 +139,7 @@ public class CaseServiceImpl implements CaseService{
 
             newCase.setPrice(caseDTO.getPrice());
             newCase.setName(caseDTO.getName());
-            newCase.setImg(caseDTO.getImg().getBytes());
+            newCase.setImg(caseDTO.getImg());
             caseRepository.save(newCase);
             return true;
         }
@@ -152,7 +153,7 @@ public class CaseServiceImpl implements CaseService{
         Optional<Case> crate = caseRepository.findById(itemDTO.getCaseId());
         if (crate.isPresent()) {
             Item item = new Item();
-            item.setImg(itemDTO.getImg().getBytes());
+            item.setImg(itemDTO.getImg());
             item.setPrice(itemDTO.getPrice());
             item.setType(itemDTO.getType());
             item.setName(itemDTO.getName());

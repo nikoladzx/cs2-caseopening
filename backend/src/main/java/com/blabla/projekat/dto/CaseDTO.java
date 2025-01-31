@@ -7,8 +7,9 @@ import java.util.List;
 public class CaseDTO {
     private Long id;
     private String name;
-    private MultipartFile img;
-    private byte[] returnedImg;
+    //private MultipartFile img;
+//    private byte[] returnedImg;
+    private String img;
     private Double price;
     private List<ItemDTO> items;
 
@@ -28,11 +29,19 @@ public class CaseDTO {
         this.name = name;
     }
 
-    public MultipartFile getImg() {
+//    public MultipartFile getImg() {
+//        return img;
+//    }
+//
+//    public void setImg(MultipartFile img) {
+//        this.img = img;
+//    }
+
+    public String getImg() {
         return img;
     }
 
-    public void setImg(MultipartFile img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
@@ -44,13 +53,13 @@ public class CaseDTO {
         this.price = price;
     }
 
-    public byte[] getReturnedImg() {
-        return returnedImg;
-    }
-
-    public void setReturnedImg(byte[] returnedImg) {
-        this.returnedImg = returnedImg;
-    }
+//    public byte[] getReturnedImg() {
+//        return returnedImg;
+//    }
+//
+//    public void setReturnedImg(byte[] returnedImg) {
+//        this.returnedImg = returnedImg;
+//    }
 
     public List<ItemDTO> getItems() {
         return items;

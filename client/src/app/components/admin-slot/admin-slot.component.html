@@ -1,0 +1,20 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2>Add Slot</h2>
+        <form (submit)="onSubmit($event)">
+          <div class="form-group">
+            <label for="slotName">Slot Name</label>
+            <input type="text" id="slotName" class="form-control" [(ngModel)]="slot.name" name="slotName" required>
+          </div>
+          <div class="form-group">
+            <label for="slotImageFile">Slot Image</label>
+            <input type="file" id="slotImageFile" class="form-control" (change)="onFileChange($event)" required>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Add Slot</button>
+        </form>
+        <div *ngIf="message" class="alert alert-info mt-3">{{ message }}</div>
+      </div>
+    </div>
+  </div>
+  

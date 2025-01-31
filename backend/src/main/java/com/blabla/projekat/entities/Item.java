@@ -9,9 +9,10 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(columnDefinition = "BYTEA")
-    private byte[] img;
+//    @Column(columnDefinition = "BYTEA")
+//    private byte[] img;
     private String name;
+    private String img;
     private Double price;
     private Type type;
     @ManyToOne
@@ -26,11 +27,20 @@ public class Item {
         this.id = id;
     }
 
-    public byte[] getImg() {
+//    public byte[] getImg() {
+//        return img;
+//    }
+//
+//    public void setImg(byte[] img) {
+//        this.img = img;
+//    }
+
+
+    public String getImg() {
         return img;
     }
 
-    public void setImg(byte[] img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
@@ -71,7 +81,8 @@ public class Item {
         ItemDTO itemDTO = new ItemDTO();
         itemDTO.setId(id);
         itemDTO.setCaseId(getCrate().getId());
-        itemDTO.setReturnedImg(getImg());
+       // itemDTO.setReturnedImg(getImg());
+        itemDTO.setImg(img);
         itemDTO.setType(getType());
         itemDTO.setPrice(getPrice());
         itemDTO.setName(getName());

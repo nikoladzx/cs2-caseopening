@@ -14,8 +14,10 @@ public class Case {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(columnDefinition = "BYTEA")
-    private byte[] img;
+//    @Column(columnDefinition = "BYTEA")
+//    private byte[] img;
+    private String img;
+
     private Double price;
     @OneToMany(mappedBy = "crate", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items;
@@ -44,11 +46,19 @@ public class Case {
         this.price = price;
     }
 
-    public byte[] getImg() {
+//    public byte[] getImg() {
+//        return img;
+//    }
+//
+//    public void setImg(byte[] img) {
+//        this.img = img;
+//    }
+
+    public String getImg() {
         return img;
     }
 
-    public void setImg(byte[] img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
@@ -64,7 +74,8 @@ public class Case {
         CaseDTO caseDTO = new CaseDTO();
         caseDTO.setId(id);
         caseDTO.setName(name);
-        caseDTO.setReturnedImg(getImg());
+        caseDTO.setImg(img);
+//        caseDTO.setReturnedImg(getImg());
         caseDTO.setPrice(getPrice());
         caseDTO.setItems(getItems().stream()
                 .map(Item::itemDTO)

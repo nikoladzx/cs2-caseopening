@@ -32,7 +32,7 @@ public class AdminController {
     }
 
     @PostMapping("/addCase")
-    public ResponseEntity<Boolean> addCase(@ModelAttribute CaseDTO caseDTO) throws IOException {
+    public ResponseEntity<Boolean> addCase(@RequestBody CaseDTO caseDTO) throws IOException {
         System.out.println("GASSGDSLKGJSDLGJDSLK");
         Boolean success = caseService.addCase(caseDTO);
         if (success)
@@ -41,7 +41,7 @@ public class AdminController {
 
     }
     @PostMapping("/addItem")
-    public ResponseEntity<Boolean> addItem(@ModelAttribute ItemDTO itemDTO) throws IOException {
+    public ResponseEntity<Boolean> addItem(@RequestBody ItemDTO itemDTO) throws IOException {
         System.out.println("gasermaser");
         Boolean success = caseService.addItem(itemDTO);
         if (success)

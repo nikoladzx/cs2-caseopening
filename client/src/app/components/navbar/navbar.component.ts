@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
     console.log(this.user$ + "ovo je prvo")
     this.user$ = this.authService.user$;
     this.user = JSON.parse(localStorage.getItem('user')!);
-    this.getProfile();
+    //this.getProfile();
     console.log(this.user$ + "ovo je drugo");
     this.userService.profileUpdated$.subscribe(()=> 
     this.getProfile());

@@ -5,8 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ItemDTO {
     private Long id;
-    private MultipartFile img;
-    private byte[] returnedImg;
+//    private MultipartFile img;
+//    private byte[] returnedImg;
+    private String img;
     private String name;
     private Double price;
     private Type type;
@@ -20,13 +21,13 @@ public class ItemDTO {
         this.id = id;
     }
 
-    public MultipartFile getImg() {
-        return img;
-    }
-
-    public void setImg(MultipartFile img) {
-        this.img = img;
-    }
+//    public MultipartFile getImg() {
+//        return img;
+//    }
+//
+//    public void setImg(MultipartFile img) {
+//        this.img = img;
+//    }
 
     public String getName() {
         return name;
@@ -60,11 +61,18 @@ public class ItemDTO {
         this.caseId = caseId;
     }
 
-    public byte[] getReturnedImg() {
-        return returnedImg;
+    public String getImg() {
+        return img;
     }
 
-    public void setReturnedImg(byte[] returnedImg) {
-        this.returnedImg = returnedImg;
+    public void setImg(String img) {
+        this.img = img;
     }
+    //    public byte[] getReturnedImg() {
+//        return returnedImg;
+//    }
+//
+//    public void setReturnedImg(byte[] returnedImg) {
+//        this.returnedImg = returnedImg;
+//    }
 }

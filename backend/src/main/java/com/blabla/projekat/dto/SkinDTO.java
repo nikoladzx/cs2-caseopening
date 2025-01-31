@@ -5,7 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class SkinDTO {
     private Long id;
-    private byte[] img;
+//    private byte[] img;
+    private String img;
     private String name;
     private Double price;
     private Type type;
@@ -20,11 +21,19 @@ public class SkinDTO {
         this.id = id;
     }
 
-    public byte[] getImg() {
+//    public byte[] getImg() {
+//        return img;
+//    }
+//
+//    public void setImg(byte[] img) {
+//        this.img = img;
+//    }
+
+    public String getImg() {
         return img;
     }
 
-    public void setImg(byte[] img) {
+    public void setImg(String img) {
         this.img = img;
     }
 

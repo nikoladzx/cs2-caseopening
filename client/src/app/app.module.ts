@@ -17,6 +17,12 @@ import { RouletteComponent } from './components/roulette/roulette.component';
 import { SlotComponent } from './components/slot/slot/slot.component';
 import { SlotpageComponent } from './pages/slotpage/slotpage.component';
 import { AddBalanceComponent } from './pages/add-balance/add-balance.component';
+import { AdminCaseComponent } from './components/admin-case/admin-case.component';
+import { AdminSlotComponent } from './components/admin-slot/admin-slot.component';
+import { AdminCaseItemComponent } from './components/admin-case-item/admin-case-item.component';
+import { AdminSlotItemComponent } from './components/admin-slot-item/admin-slot-item.component';
+import { AdminCaseListComponent } from './components/admin-case-list/admin-case-list.component';
+import { AdminSlotListComponent } from './components/admin-slot-list/admin-slot-list.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +38,13 @@ import { AddBalanceComponent } from './pages/add-balance/add-balance.component';
     RouletteComponent,
     SlotComponent,
     SlotpageComponent,
-    AddBalanceComponent
+    AddBalanceComponent,
+    AdminCaseComponent,
+    AdminSlotComponent,
+    AdminCaseItemComponent,
+    AdminSlotItemComponent,
+    AdminCaseListComponent,
+    AdminSlotListComponent
   ],
   imports: [
     BrowserModule,
