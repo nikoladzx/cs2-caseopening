@@ -34,7 +34,8 @@ export class CoinflipComponent implements OnInit {
       next: response => {
         this.coinflipResponse=response;
         this.userService.triggerProfileUpdate();
-      }
+      },
+      error : error => console.log(error)
     });
   }
 }

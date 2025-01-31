@@ -2,13 +2,14 @@ package com.blabla.projekat.controllers;
 
 import jakarta.annotation.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -26,4 +27,16 @@ public class ImageController {
             return ResponseEntity.notFound().build();
         }
     }
-}
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
+        try {
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get("F:/csgocase/slotgame1/" + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+            return ResponseEntity.ok("Image uploaded successfully: " + file.getOriginalFilename());
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Image upload failed: " + e.getMessage());
+
+        }}}

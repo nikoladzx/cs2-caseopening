@@ -59,7 +59,7 @@ export class SlotComponent implements OnInit {
     for (let i = 0; i < 3; i++) {
       randomItems.push({
         id: Math.floor(Math.random() * 1000),
-        imagepath: 'https://via.placeholder.com/150'
+        imagepath: ''
       });
     }
     return randomItems;

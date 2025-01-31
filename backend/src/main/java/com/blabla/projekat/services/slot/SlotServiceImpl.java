@@ -36,7 +36,8 @@ public class SlotServiceImpl implements SlotService{
         Optional<Slot> optionalSlot = slotRepository.findById(slotRequest.getSlotId());
         Double multiplier = 0.0;
         SlotResponse response = new SlotResponse();
-        if (optionalSlot.isPresent() && optionalUser.isPresent() && optionalUser.get().getBalance() > slotRequest.getBet()) {
+        if (optionalSlot.isPresent() && optionalUser.isPresent() &&
+                optionalUser.get().getBalance() > slotRequest.getBet()  && slotRequest.getBet()>0.0) {
             List<SlotItem> items = new ArrayList<>();
             Random random = new Random();
             for (int i =0; i<3; i++) {
@@ -119,4 +120,28 @@ public class SlotServiceImpl implements SlotService{
 
     }
 
+    @Override
+    public Boolean addSlot(SlotDTO slotDTO) {
+        Slot slot = new Slot();
+        slot.setImagepath(slotDTO.getImagepath());
+        slot.setName(slotDTO.getName());
+        slotRepository.save(slot);
+        return true;
+    }
+
+    @Override
+    public Boolean addSlotItem(SlotItemDTO slotItemDTO, Long slotId) {
+        Optional<Slot> optionalSlot = slotRepository.findById(slotId);
+        System.out.println(slotItemDTO.getMultiplier() + slotItemDTO.getImagepath());
+        if (optionalSlot.isPresent())
+        {
+            SlotItem slotItem = new SlotItem();
+            slotItem.setSlot(optionalSlot.get());
+            slotItem.setImagepath(slotItemDTO.getImagepath());
+            slotItem.setMultiplier(slotItemDTO.getMultiplier());
+            slotItemRepository.save(slotItem);
+            return true;
+        }
+        return false;
+    }
 }

@@ -9,7 +9,8 @@
             <div class="row">
               <div class="col" *ngFor="let item of displayItems">
                 <div class="slot-item">
-                  <img *ngIf="item" [src]="'http://localhost:8080/images/' + item.imagepath" class="img-fluid">
+                  <img *ngIf="slotResponse" [src]="'http://localhost:8080/images/' + item.imagepath" class="img-fluid">
+                  <img *ngIf="!slotResponse" src="https://w7.pngwing.com/pngs/450/393/png-transparent-question-mark-game-question-mark-game-angle-nintendo.png" class="img-fluid">
                 </div>
               </div>
             </div>
@@ -17,7 +18,7 @@
               <input type="number" [(ngModel)]="inputBet" class="form-control" placeholder="Enter your bet">
             </div>
             <div class="mt-4">
-              <button class="btn btn-primary" (click)="playSlot()">Play</button>
+              <button class="btn btn-dark" (click)="playSlot()">Play</button>
             </div>
             <div *ngIf="slotResponse" class="mt-4">
               <div *ngIf="slotResponse.win" class="alert alert-success">

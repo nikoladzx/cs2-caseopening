@@ -3,6 +3,9 @@ package com.blabla.projekat.dto;
 public class SlotItemDTO {
     private Long id;
     private String imagepath;
+    private Double multiplier;
+
+
 
     public Long getId() {
         return id;
@@ -18,5 +21,13 @@ public class SlotItemDTO {
 
     public void setImagepath(String imagepath) {
         this.imagepath = imagepath;
+    }
+
+    public Double getMultiplier() {
+        return multiplier;
+    }
+
+    public void setMultiplier(Double multiplier) {
+        this.multiplier = multiplier;
     }
 }

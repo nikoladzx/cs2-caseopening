@@ -28,7 +28,7 @@ public class BetServiceImpl implements BetService{
         CoinflipResponse response = new CoinflipResponse();
         if (optionalUser.isPresent())
         {
-            if (optionalUser.get().getBalance()>coinFlipRequest.getBet())
+            if (optionalUser.get().getBalance()>coinFlipRequest.getBet()  && coinFlipRequest.getBet()>0.0)
             {
                 //optionalUser.get().setBalance(optionalUser.get().getBalance()-bet);
                 Random random = new Random();
@@ -51,9 +51,11 @@ public class BetServiceImpl implements BetService{
 
                 else response.setHeads(false);
 
+                return response;
+
             }
         }
-        return response;
+        return null;
     }
 
     @Override
@@ -64,7 +66,7 @@ public class BetServiceImpl implements BetService{
         CrashResponse response = new CrashResponse();
         if (optionalUser.isPresent())
         {
-            if (optionalUser.get().getBalance()>crashRequest.getBet())
+            if (optionalUser.get().getBalance()>crashRequest.getBet() && crashRequest.getBet()>0.0)
             {
                 //optionalUser.get().setBalance(optionalUser.get().getBalance()-bet);
 
@@ -111,7 +113,7 @@ public class BetServiceImpl implements BetService{
         rouletteResponse.setWin(false);
         if (optionalUser.isPresent())
         {
-            if (optionalUser.get().getBalance()> rouletteRequest.getBet())
+            if (optionalUser.get().getBalance()> rouletteRequest.getBet()  && rouletteRequest.getBet()>0.0)
             {
 
 

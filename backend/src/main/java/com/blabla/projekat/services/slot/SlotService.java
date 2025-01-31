@@ -12,4 +12,6 @@ public interface SlotService {
     SlotResponse playSlot(SlotRequest slotRequest);
     List<SlotDTO> getSlots();
     List<SlotItemDTO> getSlotItems(Long slotId);
+    Boolean addSlot(SlotDTO slotDTO);
+    Boolean addSlotItem(SlotItemDTO slotItemDTO, Long slotId);
 }

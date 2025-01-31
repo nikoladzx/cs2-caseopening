@@ -62,8 +62,11 @@ public class BetController {
     public ResponseEntity<CoinflipResponse> coinflip(@RequestBody
                                                      CoinFlipRequest coinFlipRequest)
     {
-
+        System.out.println("gasblabla");
         CoinflipResponse response = betService.coinflip(coinFlipRequest);
+        System.out.println(response.getHeads());
+        System.out.println(response);
+        System.out.println("gk");
         if (response != null)
             return ResponseEntity.ok(response);
         return ResponseEntity.badRequest().build();
