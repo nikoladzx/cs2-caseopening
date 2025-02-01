@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { UserBasic } from 'src/app/models/UserBasic';
 import { UserService } from 'src/app/services/user/user.service';
-import { Profile } from 'src/app/models/Profile';
+import { Profile } from 'src/app/models/DTOs/Profile';
 
 @Component({
   selector: 'app-navbar',

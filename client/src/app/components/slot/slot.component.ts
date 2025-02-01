@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import SlotItem from 'src/app/models/SlotItem';
-import { SlotRequest } from 'src/app/models/SlotRequest';
-import { SlotResponse } from 'src/app/models/SlotResponse';
+import { SlotRequest } from 'src/app/models/DTOs/SlotRequest';
+import { SlotResponse } from 'src/app/models/DTOs/SlotResponse';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { BetService } from 'src/app/services/bet/bet.service';
 import { UserService } from 'src/app/services/user/user.service';

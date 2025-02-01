@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
-import { RegisterRequest } from 'src/app/models/RegisterRequest';
-import { LoginRequest } from 'src/app/models/LoginRequest';
+import { RegisterRequest } from 'src/app/models/DTOs/RegisterRequest';
+import { LoginRequest } from 'src/app/models/DTOs/LoginRequest';
 import { UserBasic } from 'src/app/models/UserBasic';
 
 

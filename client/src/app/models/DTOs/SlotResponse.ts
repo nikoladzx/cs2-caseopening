@@ -1,4 +1,4 @@
-import SlotItem from "./SlotItem";
+import SlotItem from "../SlotItem";
 
 export interface SlotResponse {
     amount: number;

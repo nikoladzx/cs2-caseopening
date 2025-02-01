@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SlotRequest } from 'src/app/models/SlotRequest';
+import { SlotRequest } from 'src/app/models/DTOs/SlotRequest';
 import { AuthService } from '../auth-service/auth.service';
-import { RouletteRequest } from 'src/app/models/RouletteRequest';
-import { CrashRequest } from 'src/app/models/CrashRequest';
-import { CoinflipRequest } from 'src/app/models/CoinflipRequest';
+import { RouletteRequest } from 'src/app/models/DTOs/RouletteRequest';
+import { CrashRequest } from 'src/app/models/DTOs/CrashRequest';
+import { CoinflipRequest } from 'src/app/models/DTOs/CoinflipRequest';
 
 const BASE_URL = "http://localhost:8080/api/bet/";
 
