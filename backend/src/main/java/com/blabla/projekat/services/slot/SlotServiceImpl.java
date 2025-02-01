@@ -59,19 +59,19 @@ public class SlotServiceImpl implements SlotService{
 
         if (items.get(0) == items.get(1) && items.get(1) == items.get(2))
         {
-            multiplier= items.get(0).getMultiplier() * items.get(1).getMultiplier() * items.get(2).getMultiplier();
+            multiplier= items.get(0).getMultiplier() * items.get(1).getMultiplier();
             response.setWin(true);
             response.setAmount(slotRequest.getBet()*multiplier);
         }
         else if (items.get(0) == items.get(1))
         {
-            multiplier= items.get(0).getMultiplier() * items.get(1).getMultiplier();
+            multiplier= items.get(0).getMultiplier();
             response.setWin(true);
             response.setAmount(slotRequest.getBet()*multiplier);
         }
         else if (items.get(2) == items.get(1))
         {
-            multiplier= items.get(2).getMultiplier() * items.get(1).getMultiplier();
+            multiplier= items.get(2).getMultiplier();
             response.setWin(true);
             response.setAmount(slotRequest.getBet()*multiplier);
         }
