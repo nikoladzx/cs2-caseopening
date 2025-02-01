@@ -23,6 +23,7 @@ import { AdminCaseListComponent } from './components/admin/admin-case-list/admin
 import { AdminSlotListComponent } from './components/admin/admin-slot-list/admin-slot-list.component';
 import { CrashComponent } from './components/crash/crash.component';
 import { CoinflipComponent } from './components/coinflip/coinflip.component';
+import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CoinflipComponent } from './components/coinflip/coinflip.component';
     AdminCaseItemComponent,
     AdminSlotItemComponent,
     AdminCaseListComponent,
-    AdminSlotListComponent
+    AdminSlotListComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,

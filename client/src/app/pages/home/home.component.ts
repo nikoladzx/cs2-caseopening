@@ -3,6 +3,7 @@ import { timeout } from 'rxjs';
 import { CaseserviceService } from 'src/app/services/case/caseservice.service';
 import { Case } from 'src/app/models/Case';
 import { ImgService } from 'src/app/services/img/img.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import { ImgService } from 'src/app/services/img/img.service';
 export class HomeComponent implements OnInit {
 
   caseList : Case[] | [] = [];
-  constructor(private caseService: CaseserviceService, private imgService: ImgService) { }
+  constructor(private caseService: CaseserviceService, private imgService: ImgService, public router : Router) { }
 
   ngOnInit(): void {
     this.getCases();

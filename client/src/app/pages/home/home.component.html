@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-4" *ngIf="router.url === '/'">
     <div class="row">
       <div class="col-lg-4 col-md-6 mb-4" *ngFor="let case of caseList">
         <div class="card h-100 shadow-sm">
@@ -12,3 +12,4 @@
       </div>
     </div>
 </div>
+<router-outlet></router-outlet>

@@ -5,7 +5,7 @@
           <img class="card-img-top" [src]="'http://localhost:8080/images/' + slot.imagepath"  alt="Card image cap" style="width: 250; height: 350px;">
           <div class="card-body">
             <h5 class="card-title">{{ slot.name }}</h5>
-            <button class="btn btn-dark mt-2" [routerLink]="['/adminslots', slot.id]">Play this slot</button>
+            <button class="btn btn-dark mt-2" [routerLink]="['/admin/adminslots', slot.id]">Play this slot</button>
           </div>
         </div>
       </div>

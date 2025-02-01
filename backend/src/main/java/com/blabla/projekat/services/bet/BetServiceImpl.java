@@ -52,7 +52,7 @@ public class BetServiceImpl implements BetService{
         Optional<User> optionalUser = userRepository.findById(crashRequest.getUserId());
         if (optionalUser.isEmpty())
             return null;
-        if (optionalUser.get().getBalance()>crashRequest.getBet() || crashRequest.getBet()<0.01)
+        if (optionalUser.get().getBalance()<crashRequest.getBet() || crashRequest.getBet()<0.01)
             return null;
 
 

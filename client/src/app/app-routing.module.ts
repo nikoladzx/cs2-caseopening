@@ -19,11 +19,17 @@ import { AdminSlotListComponent } from './components/admin/admin-slot-list/admin
 import { AdminCaseListComponent } from './components/admin/admin-case-list/admin-case-list.component';
 import { CrashComponent } from './components/crash/crash.component';
 import { CoinflipComponent } from './components/coinflip/coinflip.component';
+import { AuthUserGuardGuard } from './guards/user/auth-user-guard.guard';
+import { AdminHomeComponent } from './pages/admin-home/admin-home.component';
+import { AuthAdminGuardGuard } from './guards/admin/auth-admin-guard.guard';
 
 const routes: Routes = [
   {path:"login", component: LoginComponent},
   {path:"register", component:RegisterComponent},
-  {path:"", component:HomeComponent},
+  {path:"", 
+  component:HomeComponent,
+  canActivate: [AuthUserGuardGuard],
+  children:[
   {path:"case/:id", component:CaseComponent},
   {path:"inventory", component:InventoryComponent},
   {path:"coinflip", component:CoinflipComponent},
@@ -32,12 +38,16 @@ const routes: Routes = [
   {path:"slots", component:SlotpageComponent},
   {path:"slots/:id", component:SlotComponent},
   {path:"add-balance", component:AddBalanceComponent},
-  {path:"admin-addcase", component:AdminCaseComponent},
-  {path:"admincases/:id", component:AdminCaseItemComponent},
-  {path:"admin-addslot", component:AdminSlotComponent},
-  {path:"adminslots/:id", component:AdminSlotItemComponent},
-  {path:"adminslots", component:AdminSlotListComponent},
-  {path:"admincases", component:AdminCaseListComponent}
+  ]},
+  {path:"admin", component:AdminHomeComponent,
+     canActivate: [AuthAdminGuardGuard],
+  children:[{path:"addcase", component:AdminCaseComponent},
+    {path:"admincases/:id", component:AdminCaseItemComponent},
+    {path:"addslot", component:AdminSlotComponent},
+    {path:"adminslots/:id", component:AdminSlotItemComponent},
+    {path:"adminslots", component:AdminSlotListComponent},
+    {path:"admincases", component:AdminCaseListComponent}]
+  }
 
 ];
 

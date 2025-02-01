@@ -25,19 +25,16 @@ export class AuthService {
     return this.http.post(BASE_URL + "auth/signup", registerRequest);
   }
 
-  login(loginRequest: LoginRequest) : Observable<any>
-  {
-    return this.http.post(BASE_URL + "auth/login", loginRequest)
-      .pipe(map(((res: any) => {
-        const user = res;
-        console.log(user + "aaa");
-        if (user) 
-        {
-          localStorage.setItem('user',JSON.stringify(user));
-          this.user.next(user);
-        }
-      })));
-
+  login(loginRequest: LoginRequest): Observable<any> {
+    return this.http.post<any>(`${BASE_URL}auth/login`, loginRequest)
+      .pipe(
+        tap((response: any) => {
+          if (response) {
+            localStorage.setItem('user', JSON.stringify(response));
+            this.user.next(response);
+          }
+        })
+      );
   }
   logout() {
     localStorage.removeItem('user');
