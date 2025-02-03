@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
             <h1>Roulette</h1>
-            <div class="roulette-board mb-3">
+            <div class="roulette-board mb-3" [ngClass]="{'spinning': isSpinning}">
                 <div class="roulette-slot green">0</div>
                 <div class="roulette-slot red">1</div>
                 <div class="roulette-slot black">2</div>

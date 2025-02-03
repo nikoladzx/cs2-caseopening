@@ -1,0 +1,48 @@
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scaleUp {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  .card {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .img-fluid {
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .crash-text {
+    animation: scaleUp 0.5s ease-in-out;
+  }
+  
+  .btn-dark {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn-dark:hover {
+    background-color: #343a40;
+    transform: scale(1.05);
+  }
+  
+  input:focus {
+    border-color: #343a40;
+    box-shadow: 0 0 5px rgba(52, 58, 64, 0.5);
+  }
+  

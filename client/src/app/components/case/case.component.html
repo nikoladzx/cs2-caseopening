@@ -6,28 +6,10 @@
                     <img class="card-img-top" [src]="'http://localhost:8080/images/' + case.img" alt="Case image" style="width: 100%; height: auto;">
                     <div class="card-body text-center">
                         <h5 class="card-title" style="font-size: 1rem;">{{ case.name }}</h5>
-                        <button class="btn btn-dark" style="font-size: 0.8rem;" (click)="unbox(case.id)" data-toggle="modal" data-target="#exampleModalCenter">Open this case for {{ case.price }}</button>
+                        <button class="btn btn-dark" style="font-size: 0.8rem;" (click)="unbox(case.id)" >Open this case for {{ case.price }}$</button>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div *ngFor="let item of case.items" class="col-6 col-sm-4 col-md-3 mb-3">
-                        <div class="card h-100" style="width: 100%;">
-                            <img class="card-img-top" [src]="'http://localhost:8080/images/' + item.img"
-                                 [style.border]="'2px solid ' + item.type" 
-                                 alt="Item image" style="width: 100%; height: auto;">
-                            <div class="card-body text-center">
-                                <h6 class="card-title" [style.color]="item.type" style="font-size: 0.7rem;">
-                                  {{item.name}}
-                                </h6>
-                                <h6 class="card-title" [style.color]="item.type" style="font-size: 0.7rem;">
-                                    {{ roundToTwoDecimals(item.price * 0.5) }}$ - {{ roundToTwoDecimals(item.price * 3) }}$
-                                  </h6>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
             <div class="card h-100" style="width: 100%;" *ngIf="skin">
                 <img class="card-img-top" [src]="'http://localhost:8080/images/' + skin.img"
                      [style.border]="'2px solid ' + skin.type" 
@@ -45,6 +27,23 @@
                 </div>
                 <div class="card-body text-center">
                     <button class="btn btn-dark" style="font-size: 0.8rem;" (click)="okay()" >Ok</button>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="case && !skin">
+            <div *ngFor="let item of case!.items" class="col-3 col-sm-2 col-md-2 mb-2">
+                <div class="card h-100" style="width: 100%;">
+                    <img class="card-img-top" [src]="'http://localhost:8080/images/' + item.img"
+                         [style.border]="'2px solid ' + item.type" 
+                         alt="Item image" style="width: 100%; height: auto;">
+                    <div class="card-body text-center">
+                        <h6 class="card-title" [style.color]="item.type" style="font-size: 0.7rem;">
+                          {{item.name}}
+                        </h6>
+                        <h6 class="card-title" [style.color]="item.type" style="font-size: 0.7rem;">
+                            {{ roundToTwoDecimals(item.price * 0.5) }}$ - {{ roundToTwoDecimals(item.price * 3) }}$
+                          </h6>
+                    </div>
                 </div>
             </div>
         </div>

@@ -8,14 +8,20 @@
         <div class="card-body">
 
           <div class="mb-3 text-center" *ngIf="coinflipResponse===null">
-            <img class="img-fluid" style="max-width: 200px; height: auto;" src="https://st4.depositphotos.com/1203063/20920/i/450/depositphotos_209203500-stock-photo-gold-coin-sign-isolated-white.jpg">
+            <img class="img-fluid coin-flip" style="max-width: 200px; height: auto;" 
+                 src="https://st4.depositphotos.com/1203063/20920/i/450/depositphotos_209203500-stock-photo-gold-coin-sign-isolated-white.jpg">
           </div>
+          
           <div class="mb-3 text-center" *ngIf="coinflipResponse?.heads === true">
-            <img class="img-fluid" style="max-width: 200px; height: auto;" src="https://m.media-amazon.com/images/I/51xs7F+tP5L._AC_UF894,1000_QL80_.jpg">
+            <img class="img-fluid coin-flip" style="max-width: 200px; height: auto;" 
+                 src="https://m.media-amazon.com/images/I/51xs7F+tP5L._AC_UF894,1000_QL80_.jpg">
           </div>
+          
           <div class="mb-3 text-center" *ngIf="coinflipResponse?.heads === false">
-            <img class="img-fluid" style="max-width: 200px; height: auto;" src="https://media.istockphoto.com/id/476142091/photo/quarter-dollar-us-coin-isolated-on-white.jpg?s=612x612&w=0&k=20&c=wNzr7m0Z3dhlf8_O1G3EFNz8u2tALVobVs4K4XfFN5c=">
+            <img class="img-fluid coin-flip" style="max-width: 200px; height: auto;" 
+                 src="https://media.istockphoto.com/id/476142091/photo/quarter-dollar-us-coin-isolated-on-white.jpg?s=612x612&w=0&k=20&c=wNzr7m0Z3dhlf8_O1G3EFNz8u2tALVobVs4K4XfFN5c=">
           </div>
+          
           <div class="mb-3 text-center" *ngIf="coinflipResponse">
             <h3>{{coinflipResponse.win ? 'Congrats you won' : 'Sadly you lost'}}</h3>
           </div>

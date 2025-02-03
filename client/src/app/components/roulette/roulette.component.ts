@@ -14,6 +14,7 @@ export class RouletteComponent implements OnInit {
   betAmount: number = 0;
   betOption: string = "";
   rouletteResponse: RouletteResponse | null = null;
+  isSpinning: boolean = false;
 
   constructor(private betService: BetService, private userService: UserService, private authService: AuthService) { }
 
@@ -28,6 +29,7 @@ export class RouletteComponent implements OnInit {
 
   placeBet(): void {
     const userId = this.authService.getUserId();
+    this.isSpinning = true;
     if (userId !==null)
     {
 
@@ -36,7 +38,10 @@ export class RouletteComponent implements OnInit {
       userId:userId,
       betOption: this.betOption
     }).subscribe(response => {
-      this.rouletteResponse = response;
+      setTimeout(() => {
+        this.isSpinning = false;
+        this.rouletteResponse = response;
+      }, 2000);
       this.userService.triggerProfileUpdate();
     }, error => {
       console.error(error);
